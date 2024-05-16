@@ -1,19 +1,22 @@
 package org.example;
 
 public class PlateauSize {
-    private final int plateauDepth;
-    private final int getPlateauWidth;
+    private final int plateauXSize;
+    private final int plateauYSize;
 
-    public PlateauSize(int plateauDepth, int getPlateauWidth) {
-        this.plateauDepth = plateauDepth;
-        this.getPlateauWidth = getPlateauWidth;
+    public PlateauSize(int plateauXSize, int plateauYSize) {
+        if (plateauXSize < 0 || plateauYSize < 0) {
+            throw new IllegalArgumentException("Plateau dimensions can not be negative");
+        }
+        this.plateauXSize = plateauXSize;
+        this.plateauYSize = plateauYSize;
     }
 
-    public int getPlateauDepth() {
-        return plateauDepth;
+    public int getPlateauXSize() {
+        return plateauXSize;
     }
 
-    public int getGetPlateauWidth() {
-        return getPlateauWidth;
+    public int getPlateauYSize() {
+        return plateauYSize;
     }
 }
