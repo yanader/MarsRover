@@ -2,13 +2,9 @@ package org.example;
 
 import org.example.dataclasses.Direction;
 import org.example.dataclasses.Instruction;
-import org.example.dataclasses.PlateauSize;
 import org.example.dataclasses.Position;
 import org.example.logic.Rover;
-import org.example.parsers.SetupInputParser;
 
-import java.awt.dnd.DropTarget;
-import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
