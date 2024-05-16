@@ -2,8 +2,8 @@ Thoughts before starting:
 
 Classes for
     Rover (Extending abstract Vehicle?)
-    Plateau
-    Interface / UserInterface
+    Plateau (Added plateauSize)
+    Interface / UserInterface (likely going to split this out into input parsing and ui)
     Logic
 
 Consideration (Beyond MVP)
