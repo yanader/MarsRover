@@ -1,0 +1,5 @@
+1)
+    Finish TDD implementation of Plateua
+
+
+Currently in Ex 4 of sprint but sort of have done to 8

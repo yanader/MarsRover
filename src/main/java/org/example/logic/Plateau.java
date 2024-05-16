@@ -1,7 +1,6 @@
 package org.example.logic;
 
 import org.example.dataclasses.Direction;
-import org.example.dataclasses.Instruction;
 import org.example.dataclasses.PlateauSize;
 
 import java.util.ArrayList;
@@ -33,6 +32,32 @@ public class Plateau {
     }
 
     public boolean moveForwardIsPossible(Vehicle vehicle) {
-        return false;
+        int xInFront = xCoordinateInFrontOfVehicle(vehicle);
+        int yInFront = yCoordinateInFrontOfVehicle(vehicle);
+
+        if (xInFront < 0 || yInFront < 0 ||
+                xInFront > plateauSize.getPlateauXSize() - 1 ||
+        yInFront > plateauSize.getPlateauYSize() - 1) {
+            return false;
+        }
+        return isEmpty(xInFront, yInFront);
+    }
+
+    private int xCoordinateInFrontOfVehicle(Vehicle vehicle) {
+        if (vehicle.reportPosition().getDirection() == Direction.W) {
+            return vehicle.reportPosition().getX() - 1;
+        } else if (vehicle.reportPosition().getDirection() == Direction.E) {
+            return vehicle.reportPosition().getX() + 1;
+        } else return vehicle.reportPosition().getX();
+    }
+
+    private int yCoordinateInFrontOfVehicle(Vehicle vehicle) {
+        if (vehicle.reportPosition().getDirection() == Direction.S) {
+            return vehicle.reportPosition().getY() - 1;
+        } else if (vehicle.reportPosition().getDirection() == Direction.N) {
+            return vehicle.reportPosition().getY() + 1;
+        } else {
+            return vehicle.reportPosition().getY();
+        }
     }
 }
