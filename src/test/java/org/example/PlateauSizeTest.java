@@ -24,6 +24,8 @@ class PlateauSizeTest {
             assertThrows(IllegalArgumentException.class, () -> new PlateauSize(-1, 2));
             assertThrows(IllegalArgumentException.class, () -> new PlateauSize(0, -2));
             assertThrows(IllegalArgumentException.class, () -> new PlateauSize(-5, -3));
+            assertThrows(IllegalArgumentException.class, () -> new PlateauSize(0, 0));
+            assertThrows(IllegalArgumentException.class, () -> new PlateauSize(5, 0));
         });
 
 

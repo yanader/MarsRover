@@ -5,8 +5,8 @@ public class PlateauSize {
     private final int plateauYSize;
 
     public PlateauSize(int plateauXSize, int plateauYSize) {
-        if (plateauXSize < 0 || plateauYSize < 0) {
-            throw new IllegalArgumentException("Plateau dimensions can not be negative");
+        if (plateauXSize < 1 || plateauYSize < 1) {
+            throw new IllegalArgumentException("Plateau dimensions can not be zero/negative");
         }
         this.plateauXSize = plateauXSize;
         this.plateauYSize = plateauYSize;

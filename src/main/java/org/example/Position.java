@@ -6,6 +6,9 @@ public class Position {
     private Direction direction;
 
     public Position(int x, int y, Direction direction) {
+        if (x < 0 || y < 0) {
+            throw new IllegalArgumentException("Position can not be negative");
+        }
         this.x = x;
         this.y = y;
         this.direction = direction;
