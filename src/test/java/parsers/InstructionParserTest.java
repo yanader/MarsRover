@@ -10,7 +10,7 @@ class InstructionParserTest {
 
     @Test
     void createInstructionListReturnsInstructionArray() {
-        assertEquals(Instruction[].class, InstructionParser.createInstructionList("input").getClass());
+        assertEquals(Instruction[].class, InstructionParser.createInstructionList("LRM").getClass());
     }
 
     @Test
