@@ -11,10 +11,10 @@ public class Rover extends Vehicle implements Movable{
     public void executeMovementInstructions(Instruction[] instructions) {
         for (Instruction instruction : instructions) {
             if (instruction == Instruction.M) {
-                this.position = moveForwards(this.reportPosition());
+                super.setPosition(moveForwards(this.reportPosition()));
             } else {
                 Direction newDirection = rotate(this.reportPosition().getDirection(), instruction);
-                this.position = new Position(this.reportPosition().getX(), this.reportPosition().getY(), newDirection);
+                super.setPosition(new Position(this.reportPosition().getX(), this.reportPosition().getY(), newDirection));
             }
         }
     }
