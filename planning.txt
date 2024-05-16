@@ -10,3 +10,13 @@ Classes for
 Consideration (Beyond MVP)
     Allow user to input an invalid instruction and then prompt them to either cancel or perform a truncated version
         (Need input checking on logic?)
+
+Where does the logic sit for checking if a move is valid.
+    On the Plateau and gets called by the CommandCentre?
+
+
+
+
+Using abstract class Vehicle so that Plateau can ultimately have an array of Vehicles.
+Behaviours (move, photo, dig, wave) will be dictated by interfaces)
+Vehicle should be able to reportPosition

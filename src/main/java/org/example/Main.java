@@ -1,15 +1,20 @@
 package org.example;
 
+import org.example.dataclasses.Direction;
+import org.example.dataclasses.Instruction;
 import org.example.dataclasses.PlateauSize;
 import org.example.dataclasses.Position;
-import parsers.SetupInputParser;
+import org.example.logic.Rover;
+import org.example.parsers.SetupInputParser;
+
+import java.awt.dnd.DropTarget;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        PlateauSize p = SetupInputParser.createPlateauSize("9 9");
-        Position position = SetupInputParser.createInitialPosition("1 2 S");
+        Rover rover = new Rover(new Position(0, 0, Direction.S));
 
-        System.out.println(p.getPlateauXSize());
-        System.out.println(position);
+        System.out.println(rover.rotate(Direction.N, Instruction.R));
+
     }
 }

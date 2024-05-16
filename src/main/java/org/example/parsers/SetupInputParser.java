@@ -1,4 +1,4 @@
-package parsers;
+package org.example.parsers;
 
 import org.example.dataclasses.Direction;
 import org.example.dataclasses.PlateauSize;

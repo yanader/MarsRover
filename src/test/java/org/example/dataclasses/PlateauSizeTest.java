@@ -1,6 +1,5 @@
-package org.example;
+package org.example.dataclasses;
 
-import org.example.dataclasses.PlateauSize;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

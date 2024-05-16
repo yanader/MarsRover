@@ -1,6 +1,7 @@
-package parsers;
+package org.example.parsers;
 
 import org.example.dataclasses.Instruction;
+import org.example.parsers.InstructionParser;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,7 +1,5 @@
-package org.example;
+package org.example.dataclasses;
 
-import org.example.dataclasses.Direction;
-import org.example.dataclasses.Position;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

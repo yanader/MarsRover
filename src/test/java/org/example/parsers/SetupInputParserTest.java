@@ -1,8 +1,9 @@
-package parsers;
+package org.example.parsers;
 
 import org.example.dataclasses.Direction;
 import org.example.dataclasses.PlateauSize;
 import org.example.dataclasses.Position;
+import org.example.parsers.SetupInputParser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
