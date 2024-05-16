@@ -1,0 +1,11 @@
+Thoughts before starting:
+
+Classes for
+    Rover (Extending abstract Vehicle?)
+    Plateau
+    Interface / UserInterface
+    Logic
+
+Consideration (Beyond MVP)
+    Allow user to input an invalid instruction and then prompt them to either cancel or perform a truncated version
+        (Need input checking on logic?)
