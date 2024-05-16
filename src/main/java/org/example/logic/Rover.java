@@ -21,7 +21,7 @@ public class Rover extends Vehicle implements Movable{
 
     // Although the move() method is contracted due to Rover implementing Movable, there
     // private methods will be used to implements Rover's specific implementation of move()
-    public Direction rotate(Direction currentDirection, Instruction rotationalDirection) {
+    private Direction rotate(Direction currentDirection, Instruction rotationalDirection) {
         if (currentDirection == Direction.N) {
             return rotationalDirection == Instruction.L ? Direction.W : Direction.E;
         } else if (currentDirection == Direction.E) {
