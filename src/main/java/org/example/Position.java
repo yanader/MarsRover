@@ -38,6 +38,7 @@ public class Position {
         this.direction = direction;
     }
 
+    @Override
     public String toString() {
         return "Position: (" + x + "," + y + ") Facing: " + direction;
     }
