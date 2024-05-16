@@ -1,6 +1,6 @@
 package parsers;
 
-import org.example.Instruction;
+import org.example.dataclasses.Instruction;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

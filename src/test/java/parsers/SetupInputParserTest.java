@@ -1,8 +1,8 @@
 package parsers;
 
-import org.example.Direction;
-import org.example.PlateauSize;
-import org.example.Position;
+import org.example.dataclasses.Direction;
+import org.example.dataclasses.PlateauSize;
+import org.example.dataclasses.Position;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

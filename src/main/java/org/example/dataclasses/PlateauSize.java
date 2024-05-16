@@ -1,4 +1,4 @@
-package org.example;
+package org.example.dataclasses;
 
 public class PlateauSize {
     private final int plateauXSize;

@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.dataclasses.PlateauSize;
+import org.example.dataclasses.Position;
 import parsers.SetupInputParser;
 
 public class Main {

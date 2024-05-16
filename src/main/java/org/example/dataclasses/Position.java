@@ -1,4 +1,4 @@
-package org.example;
+package org.example.dataclasses;
 
 public class Position {
     private int x;

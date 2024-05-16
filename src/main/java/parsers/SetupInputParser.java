@@ -1,8 +1,8 @@
 package parsers;
 
-import org.example.Direction;
-import org.example.PlateauSize;
-import org.example.Position;
+import org.example.dataclasses.Direction;
+import org.example.dataclasses.PlateauSize;
+import org.example.dataclasses.Position;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
