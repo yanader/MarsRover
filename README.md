@@ -16,7 +16,11 @@ The rover maintains its position which consists of an X coordinate, a Y coordina
 
 ### Instructions
 
-To start the programme, run Main.java. This will provide you with a custom-built Command Centre which will allow you to control the Mars Rover.
+To start the programme navigate via terminal to the location of MarsRover.jar and execute with
+
+> `java -jar MarsRover.jar`
+
+This will provide you with a custom-built Command Centre which will allow you to control the Mars Rover.
 
 1. Setup
    1. Provide the size of the Plateau to be explored in the format "X Y" where X and Y are positive integers.
