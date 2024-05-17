@@ -1,7 +1,9 @@
 package org.example.logic;
 
 import org.example.dataclasses.Direction;
+import org.example.dataclasses.Instruction;
 import org.example.dataclasses.PlateauSize;
+import org.example.dataclasses.Position;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,22 @@ public class Plateau {
         for (Vehicle vehicle:vehicles) {
             if (vehicle.reportPosition().getX() == x && vehicle.reportPosition().getY() == y) {
                 return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean instructionSetIsPossible(Vehicle vehicle, Instruction[] instructions) {
+        Rover proxyRover = new Rover(new Position(vehicle.reportPosition().getX(), vehicle.reportPosition().getY(), vehicle.reportPosition().getDirection()));
+        for (int i = 0; i < instructions.length; i++) {
+            if(instructions[i] == Instruction.L || instructions[i] == Instruction.R) {
+                Direction newDirection = proxyRover.rotate(proxyRover.reportPosition().getDirection(), instructions[i]);
+                proxyRover.setPosition(new Position(proxyRover.reportPosition().getX(), proxyRover.reportPosition().getY(), newDirection));
+            } else if (instructions[i] == Instruction.M && !moveForwardIsPossible(proxyRover)) {
+                return false;
+            } else {
+                Position newPosition = proxyRover.moveForwards(proxyRover.reportPosition());
+                proxyRover.setPosition(newPosition);
             }
         }
         return true;

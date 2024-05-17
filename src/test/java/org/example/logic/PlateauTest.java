@@ -1,6 +1,7 @@
 package org.example.logic;
 
 import org.example.dataclasses.Direction;
+import org.example.dataclasses.Instruction;
 import org.example.dataclasses.PlateauSize;
 import org.example.dataclasses.Position;
 import org.junit.jupiter.api.Test;
@@ -68,6 +69,30 @@ class PlateauTest {
             assertTrue(plateau.moveForwardIsPossible(roverFour));
             assertTrue(plateau.moveForwardIsPossible(roverFive));
             assertTrue(plateau.moveForwardIsPossible(roverSix));
+        });
+    }
+
+    @Test
+    void instructionSetIsPossibleReturnsCorrectBoolean() {
+        Plateau plateau = new Plateau(new PlateauSize(10, 10));
+        Vehicle rover = new Rover(new Position(0, 0, Direction.N));
+        plateau.landVehicle(rover);
+        Instruction[] trueSetOne = {Instruction.M, Instruction.R, Instruction.M, Instruction.L, Instruction.M};
+        Instruction[] trueSetTwo = {Instruction.M, Instruction.M, Instruction.M};
+        Instruction[] trueSetThree = {Instruction.R, Instruction.R, Instruction.R, Instruction.R, Instruction.M};
+        Instruction[] falseSetOne = {Instruction.L, Instruction.M};
+        Instruction[] falseSetTwo = {Instruction.M, Instruction.M, Instruction.M, Instruction.M, Instruction.M, Instruction.M, Instruction.M, Instruction.M, Instruction.M, Instruction.M,Instruction.M};
+        Instruction[] falseSetThree = {Instruction.R, Instruction.R, Instruction.M};
+
+
+        assertAll(() -> {
+           assertTrue(plateau.instructionSetIsPossible(rover, trueSetOne));
+           assertTrue(plateau.instructionSetIsPossible(rover, trueSetTwo));
+           assertTrue(plateau.instructionSetIsPossible(rover, trueSetThree));
+           assertFalse(plateau.instructionSetIsPossible(rover, falseSetOne));
+           assertFalse(plateau.instructionSetIsPossible(rover, falseSetTwo));
+           assertFalse(plateau.instructionSetIsPossible(rover, falseSetThree));
+           
         });
     }
 }
