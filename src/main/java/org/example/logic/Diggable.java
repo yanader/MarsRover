@@ -1,8 +1,8 @@
 package org.example.logic;
 
-import org.example.dataclasses.Instruction;
+import org.example.dataclasses.Resource;
 
 public interface Diggable {
 
-    void executeDiggingInstructions(Instruction[] instructions);
+    public Resource dig();
 }

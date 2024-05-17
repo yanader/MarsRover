@@ -2,6 +2,7 @@ package org.example.logic;
 
 import org.example.dataclasses.Instruction;
 import org.example.dataclasses.Position;
+import org.example.dataclasses.Resource;
 
 public class Miner extends Vehicle implements Diggable{
     private int drillCharges;
@@ -11,7 +12,7 @@ public class Miner extends Vehicle implements Diggable{
     }
 
     @Override
-    public void executeDiggingInstructions(Instruction[] instructions) {
-
+    public Resource dig() {
+        return Resource.digForResource();
     }
 }
