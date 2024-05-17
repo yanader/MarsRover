@@ -2,14 +2,15 @@ Done
 -) MVP achieved
 -) README
 -) Implement truncation of instructions
-
-
-In Progress
--) new vehicle type (with Diggable) interface (branch -Miner)
+-) In command-centre - drop vehicle needs to ask for the type of vehicle to drop
 -) On landing a new vehicle, check the space is empty
+-) new vehicle type (with Diggable) interface (branch -Miner)
 
-In command-centre - drop vehicle needs to ask for the type of vehicle to drop
+
+NEXT
 implement activate vehicle.
+    need to return a list of vehicles (either all or of the specified type)
+    and chop them into an option set the user can choose from so we can activate it
 
 
 CLEAN UP USER INTERFACE -- too much text
