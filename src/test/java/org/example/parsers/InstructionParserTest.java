@@ -1,7 +1,6 @@
 package org.example.parsers;
 
 import org.example.dataclasses.Instruction;
-import org.example.parsers.InstructionParser;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,42 +8,42 @@ import static org.junit.jupiter.api.Assertions.*;
 class InstructionParserTest {
 
     @Test
-    void createInstructionListReturnsInstructionArray() {
-        assertEquals(Instruction[].class, InstructionParser.createInstructionList("LRM").getClass());
+    void createInstructionListReturnsMovementInstructionArray() {
+        assertEquals(Instruction[].class, InstructionParser.createMovementInstructionList("LRM").getClass());
     }
 
     @Test
-    void createInstructionListRejectsInvalidInput() {
+    void createMovementInstructionListRejectsInvalidInput() {
         assertAll(() -> {
-           assertThrows(IllegalArgumentException.class, () -> InstructionParser.createInstructionList(""));
-           assertThrows(IllegalArgumentException.class, () -> InstructionParser.createInstructionList("LRF"));
-           assertThrows(IllegalArgumentException.class, () -> InstructionParser.createInstructionList("Q"));
-           assertThrows(IllegalArgumentException.class, () -> InstructionParser.createInstructionList("!"));
-           assertThrows(IllegalArgumentException.class, () -> InstructionParser.createInstructionList("L R M"));
+           assertThrows(IllegalArgumentException.class, () -> InstructionParser.createMovementInstructionList(""));
+           assertThrows(IllegalArgumentException.class, () -> InstructionParser.createMovementInstructionList("LRF"));
+           assertThrows(IllegalArgumentException.class, () -> InstructionParser.createMovementInstructionList("Q"));
+           assertThrows(IllegalArgumentException.class, () -> InstructionParser.createMovementInstructionList("!"));
+           assertThrows(IllegalArgumentException.class, () -> InstructionParser.createMovementInstructionList("L R M"));
         });
     }
 
     @Test
-    void createInstructionListAcceptsValidInput() {
+    void createMovementInstructionListAcceptsValidInput() {
         assertAll(() -> {
-            assertDoesNotThrow(() -> InstructionParser.createInstructionList("L"));
-            assertDoesNotThrow(() -> InstructionParser.createInstructionList("R"));
-            assertDoesNotThrow(() -> InstructionParser.createInstructionList("M"));
-            assertDoesNotThrow(() -> InstructionParser.createInstructionList("LMR"));
-            assertDoesNotThrow(() -> InstructionParser.createInstructionList("RMLRLMRMLRLMRMLRMRMRLRMLR"));
+            assertDoesNotThrow(() -> InstructionParser.createMovementInstructionList("L"));
+            assertDoesNotThrow(() -> InstructionParser.createMovementInstructionList("R"));
+            assertDoesNotThrow(() -> InstructionParser.createMovementInstructionList("M"));
+            assertDoesNotThrow(() -> InstructionParser.createMovementInstructionList("LMR"));
+            assertDoesNotThrow(() -> InstructionParser.createMovementInstructionList("RMLRLMRMLRLMRMLRMRMRLRMLR"));
         });
     }
 
     @Test
-    void createInstructionListReturnsCorrectList() {
+    void createMovementInstructionListReturnsCorrectList() {
         Instruction[] testInstructionSetOne = {Instruction.L, Instruction.M, Instruction.R};
         Instruction[] testInstructionSetTwo = {Instruction.M, Instruction.M, Instruction.M};
         Instruction[] testInstructionSetThree = {Instruction.M};
 
         assertAll(() -> {
-           assertArrayEquals(testInstructionSetOne, InstructionParser.createInstructionList("LMR"));
-           assertArrayEquals(testInstructionSetTwo, InstructionParser.createInstructionList("MMM"));
-           assertArrayEquals(testInstructionSetThree, InstructionParser.createInstructionList("M"));
+           assertArrayEquals(testInstructionSetOne, InstructionParser.createMovementInstructionList("LMR"));
+           assertArrayEquals(testInstructionSetTwo, InstructionParser.createMovementInstructionList("MMM"));
+           assertArrayEquals(testInstructionSetThree, InstructionParser.createMovementInstructionList("M"));
         });
     }
 }

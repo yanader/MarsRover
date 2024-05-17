@@ -7,8 +7,8 @@ import java.util.regex.Pattern;
 
 public class InstructionParser {
 
-    public static Instruction[] createInstructionList(String input) throws IllegalArgumentException {
-        if (!createInstructionListInputIsValid(input)) {
+    public static Instruction[] createMovementInstructionList(String input) throws IllegalArgumentException {
+        if (!createMovementInstructionListInputIsValid(input)) {
             throw new IllegalArgumentException("Invalid input. L/R/M accepted");
         }
         Instruction[] instructionStream = new Instruction[input.length()];
@@ -18,7 +18,7 @@ public class InstructionParser {
         return instructionStream;
     }
 
-    private static boolean createInstructionListInputIsValid(String input) {
+    private static boolean createMovementInstructionListInputIsValid(String input) {
         Matcher matcher = Pattern.compile("^[RLM]+$").matcher(input);
         return matcher.find();
     }
@@ -27,6 +27,7 @@ public class InstructionParser {
         if (c == 'L') return Instruction.L;
         if (c == 'R') return Instruction.R;
         if (c == 'M') return Instruction.M;
+        if (c == 'D') return Instruction.D;
         return null;
     }
 
