@@ -16,7 +16,7 @@ The rover maintains its position which consists of an X coordinate, a Y coordina
 
 ### Instructions
 
-To start the programme navigate via terminal to the location of MarsRover.jar and execute with
+To start the programme, navigate via terminal to the location of MarsRover.jar and execute with
 
 > `java -jar MarsRover.jar`
 
