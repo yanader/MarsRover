@@ -6,6 +6,7 @@ import org.example.dataclasses.PlateauSize;
 import org.example.dataclasses.Position;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Plateau {
@@ -47,6 +48,26 @@ public class Plateau {
             }
         }
         return true;
+    }
+
+    public Instruction[] truncateInstructions(Vehicle vehicle, Instruction[] instructions) {
+        List<Instruction> truncatedInstructionSet = new ArrayList<>();
+        Rover proxyRover = new Rover(new Position(vehicle.reportPosition().x(), vehicle.reportPosition().y(), vehicle.reportPosition().direction()));
+        for (Instruction instruction : instructions) {
+            if (instruction == Instruction.L || instruction == Instruction.R) {
+                truncatedInstructionSet.add(instruction);
+                Direction newDirection = proxyRover.rotate(proxyRover.reportPosition().direction(), instruction);
+                proxyRover.setPosition(new Position(proxyRover.reportPosition().x(), proxyRover.reportPosition().y(), newDirection));
+            } else if (instruction == Instruction.M && moveForwardIsPossible(proxyRover)) {
+                truncatedInstructionSet.add(instruction);
+                Position newPosition = proxyRover.moveForwards(proxyRover.reportPosition());
+                proxyRover.setPosition(newPosition);
+            } else if (instruction == Instruction.M && !moveForwardIsPossible(proxyRover)) {
+                break;
+            }
+        }
+        Instruction[] truncatedInstructionArray = new Instruction[truncatedInstructionSet.size()];
+        return truncatedInstructionSet.toArray(truncatedInstructionArray);
     }
 
     public boolean moveForwardIsPossible(Vehicle vehicle) {

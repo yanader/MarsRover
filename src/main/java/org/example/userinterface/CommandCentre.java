@@ -10,6 +10,7 @@ import org.example.logic.Rover;
 import org.example.parsers.InstructionParser;
 import org.example.parsers.SetupInputParser;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class CommandCentre {
@@ -35,9 +36,10 @@ public class CommandCentre {
                 if (activeVehicle == null) dropRover();
                 if (plateau.instructionSetIsPossible(activeVehicle, instructions)) {
                     executeInstruction(activeVehicle, instructions);
-                    System.out.println("Vehicle type: " + activeVehicle.getClass().getSimpleName() + " now at " + activeVehicle.reportPosition());
+//                    System.out.println("Vehicle type: " + activeVehicle.getClass().getSimpleName() + " now at " + activeVehicle.reportPosition());
                 } else {
                     System.out.println("I'm sorry, this instruction set causes a collision and can not be executed.");
+                    offerTruncatedInstructionsAsMove(activeVehicle, instructions);
                 }
             } else {
                 createPlateau();
@@ -109,6 +111,7 @@ public class CommandCentre {
     private void executeInstruction(Vehicle vehicle, Instruction[] instructions) {
         if (vehicle instanceof Movable mover) {
             mover.executeMovementInstructions(instructions);
+            System.out.println("Vehicle type: " + activeVehicle.getClass().getSimpleName() + " now at " + activeVehicle.reportPosition());
         }
     }
 
@@ -127,13 +130,30 @@ public class CommandCentre {
 
     }
 
-    /*
-    Instruction truncateInstruction() {
-      This will be the first "beyond MVP" implementation that
-      offers the user a truncated version of an invalid instruction
-      if the controlled rover was to hit an object or the edge of the plateau
+
+    private Instruction[] truncateInstruction(Vehicle vehicle, Instruction[] instructions) {
+        return plateau.truncateInstructions(vehicle, instructions);
     }
-    */
+
+    private void offerTruncatedInstructionsAsMove(Vehicle vehicle, Instruction[] instructions) {
+        Instruction[] truncatedInstructions = truncateInstruction(vehicle, instructions);
+        if (truncatedInstructions.length > 0) {
+            System.out.println("The truncated instruction set that can be executed successfully is: ");
+            while (true) {
+                System.out.println(Arrays.toString(truncatedInstructions));
+                System.out.println("Would you like to execute this command? (Y to proceed, N to reject)");
+                if (scanner.nextLine().equalsIgnoreCase("Y")) {
+                    executeInstruction(vehicle, truncatedInstructions);
+                    break;
+                } else if (scanner.nextLine().equalsIgnoreCase("N")) {
+                    System.out.println("Instruction Cancelled");
+                    break;
+                }
+            }
+
+        }
+    }
+
 
 
 
