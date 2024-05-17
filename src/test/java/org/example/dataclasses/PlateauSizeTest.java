@@ -11,10 +11,10 @@ class PlateauSizeTest {
         PlateauSize plateauOne = new PlateauSize(1, 1);
         PlateauSize plateauTwo = new PlateauSize(7, 14);
 
-        assertEquals(1, plateauOne.getPlateauXSize());
-        assertEquals(1, plateauOne.getPlateauYSize());
-        assertEquals(7, plateauTwo.getPlateauXSize());
-        assertEquals(14, plateauTwo.getPlateauYSize());
+        assertEquals(1, plateauOne.plateauXSize());
+        assertEquals(1, plateauOne.plateauYSize());
+        assertEquals(7, plateauTwo.plateauXSize());
+        assertEquals(14, plateauTwo.plateauYSize());
 
     }
 

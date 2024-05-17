@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Plateau {
     final private PlateauSize plateauSize;
-    private List<Vehicle> vehicles;
+    final private List<Vehicle> vehicles;
 
     public Plateau(PlateauSize plateauSize) {
         this.plateauSize = plateauSize;
@@ -22,11 +22,11 @@ public class Plateau {
     }
 
     public boolean isEmpty(int x, int y) throws IllegalArgumentException {
-        if (x < 0 || y < 0 || x > plateauSize.getPlateauXSize() || y > plateauSize.getPlateauYSize()) {
+        if (x < 0 || y < 0 || x > plateauSize.plateauXSize() || y > plateauSize.plateauYSize()) {
             throw new IllegalArgumentException("Invalid Position");
         }
         for (Vehicle vehicle:vehicles) {
-            if (vehicle.reportPosition().getX() == x && vehicle.reportPosition().getY() == y) {
+            if (vehicle.reportPosition().x() == x && vehicle.reportPosition().y() == y) {
                 return false;
             }
         }
@@ -34,12 +34,12 @@ public class Plateau {
     }
 
     public boolean instructionSetIsPossible(Vehicle vehicle, Instruction[] instructions) {
-        Rover proxyRover = new Rover(new Position(vehicle.reportPosition().getX(), vehicle.reportPosition().getY(), vehicle.reportPosition().getDirection()));
-        for (int i = 0; i < instructions.length; i++) {
-            if(instructions[i] == Instruction.L || instructions[i] == Instruction.R) {
-                Direction newDirection = proxyRover.rotate(proxyRover.reportPosition().getDirection(), instructions[i]);
-                proxyRover.setPosition(new Position(proxyRover.reportPosition().getX(), proxyRover.reportPosition().getY(), newDirection));
-            } else if (instructions[i] == Instruction.M && !moveForwardIsPossible(proxyRover)) {
+        Rover proxyRover = new Rover(new Position(vehicle.reportPosition().x(), vehicle.reportPosition().y(), vehicle.reportPosition().direction()));
+        for (Instruction instruction : instructions) {
+            if (instruction == Instruction.L || instruction == Instruction.R) {
+                Direction newDirection = proxyRover.rotate(proxyRover.reportPosition().direction(), instruction);
+                proxyRover.setPosition(new Position(proxyRover.reportPosition().x(), proxyRover.reportPosition().y(), newDirection));
+            } else if (instruction == Instruction.M && !moveForwardIsPossible(proxyRover)) {
                 return false;
             } else {
                 Position newPosition = proxyRover.moveForwards(proxyRover.reportPosition());
@@ -54,28 +54,28 @@ public class Plateau {
         int yInFront = yCoordinateInFrontOfVehicle(vehicle);
 
         if (xInFront < 0 || yInFront < 0 ||
-                xInFront > plateauSize.getPlateauXSize() - 1 ||
-        yInFront > plateauSize.getPlateauYSize() - 1) {
+                xInFront > plateauSize.plateauXSize() - 1 ||
+        yInFront > plateauSize.plateauYSize() - 1) {
             return false;
         }
         return isEmpty(xInFront, yInFront);
     }
 
     private int xCoordinateInFrontOfVehicle(Vehicle vehicle) {
-        if (vehicle.reportPosition().getDirection() == Direction.W) {
-            return vehicle.reportPosition().getX() - 1;
-        } else if (vehicle.reportPosition().getDirection() == Direction.E) {
-            return vehicle.reportPosition().getX() + 1;
-        } else return vehicle.reportPosition().getX();
+        if (vehicle.reportPosition().direction() == Direction.W) {
+            return vehicle.reportPosition().x() - 1;
+        } else if (vehicle.reportPosition().direction() == Direction.E) {
+            return vehicle.reportPosition().x() + 1;
+        } else return vehicle.reportPosition().x();
     }
 
     private int yCoordinateInFrontOfVehicle(Vehicle vehicle) {
-        if (vehicle.reportPosition().getDirection() == Direction.S) {
-            return vehicle.reportPosition().getY() - 1;
-        } else if (vehicle.reportPosition().getDirection() == Direction.N) {
-            return vehicle.reportPosition().getY() + 1;
+        if (vehicle.reportPosition().direction() == Direction.S) {
+            return vehicle.reportPosition().y() - 1;
+        } else if (vehicle.reportPosition().direction() == Direction.N) {
+            return vehicle.reportPosition().y() + 1;
         } else {
-            return vehicle.reportPosition().getY();
+            return vehicle.reportPosition().y();
         }
     }
 }

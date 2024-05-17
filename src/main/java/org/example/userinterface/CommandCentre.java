@@ -13,7 +13,7 @@ import org.example.parsers.SetupInputParser;
 import java.util.Scanner;
 
 public class CommandCentre {
-    private Scanner scanner;
+    final private Scanner scanner;
     private Plateau plateau;
     private Vehicle activeVehicle;
 
@@ -31,12 +31,18 @@ public class CommandCentre {
                 System.out.println("Thanks for visiting Mars. Please come back soon!");
                 return;
             }
-            if (plateau.instructionSetIsPossible(activeVehicle, instructions)) {
-                executeInstruction(activeVehicle, instructions);
-                System.out.println("Vehicle type: " + activeVehicle.getClass().getSimpleName() + " now at " + activeVehicle.reportPosition());
+            if (plateau != null) {
+                if (activeVehicle == null) dropRover();
+                if (plateau.instructionSetIsPossible(activeVehicle, instructions)) {
+                    executeInstruction(activeVehicle, instructions);
+                    System.out.println("Vehicle type: " + activeVehicle.getClass().getSimpleName() + " now at " + activeVehicle.reportPosition());
+                } else {
+                    System.out.println("I'm sorry, this instruction set causes a collision and can not be executed.");
+                }
             } else {
-                System.out.println("I'm sorry, this instruction set causes a collision and can not be executed.");
+                createPlateau();
             }
+
         }
     }
 
@@ -51,9 +57,9 @@ public class CommandCentre {
             try {
                 PlateauSize ps = SetupInputParser.createPlateauSize(scanner.nextLine());
                 plateau = new Plateau(ps);
-                System.out.println("Exploring plateau of size " + ps.getPlateauXSize() + " * " + ps.getPlateauYSize());
-                System.out.println("x-Axis: 0 - " + (ps.getPlateauXSize() - 1));
-                System.out.println("y-Axis: 0 - " + (ps.getPlateauYSize() - 1));
+                System.out.println("Exploring plateau of size " + ps.plateauXSize() + " * " + ps.plateauYSize());
+                System.out.println("x-Axis: 0 - " + (ps.plateauXSize() - 1));
+                System.out.println("y-Axis: 0 - " + (ps.plateauYSize() - 1));
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println("Invalid input for plateau size");
@@ -101,8 +107,7 @@ public class CommandCentre {
     }
 
     private void executeInstruction(Vehicle vehicle, Instruction[] instructions) {
-        if (vehicle instanceof Movable) {
-            Movable mover = (Movable)vehicle;
+        if (vehicle instanceof Movable mover) {
             mover.executeMovementInstructions(instructions);
         }
     }

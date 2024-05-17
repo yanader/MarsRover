@@ -3,7 +3,6 @@ package org.example.parsers;
 import org.example.dataclasses.Direction;
 import org.example.dataclasses.PlateauSize;
 import org.example.dataclasses.Position;
-import org.example.parsers.SetupInputParser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -44,12 +43,12 @@ class SetupInputParserTest {
         PlateauSize plateauSizeThree = SetupInputParser.createPlateauSize("15 16");
 
         assertAll(() -> {
-                    assertEquals(10, plateauSizeOne.getPlateauXSize());
-                    assertEquals(10, plateauSizeOne.getPlateauYSize());
-                    assertEquals(1, plateauSizeTwo.getPlateauXSize());
-                    assertEquals(100, plateauSizeTwo.getPlateauYSize());
-                    assertEquals(15, plateauSizeThree.getPlateauXSize());
-                    assertEquals(16, plateauSizeThree.getPlateauYSize());
+                    assertEquals(10, plateauSizeOne.plateauXSize());
+                    assertEquals(10, plateauSizeOne.plateauYSize());
+                    assertEquals(1, plateauSizeTwo.plateauXSize());
+                    assertEquals(100, plateauSizeTwo.plateauYSize());
+                    assertEquals(15, plateauSizeThree.plateauXSize());
+                    assertEquals(16, plateauSizeThree.plateauYSize());
                 });
     }
 
@@ -88,15 +87,15 @@ class SetupInputParserTest {
             Position positionThree = SetupInputParser.createInitialPosition("13 100 W");
 
             assertAll(() -> {
-                assertEquals(0,positionOne.getX());
-                assertEquals(0,positionOne.getY());
-                Assertions.assertEquals(Direction.N,positionOne.getDirection());
-                assertEquals(15,positionTwo.getX());
-                assertEquals(14,positionTwo.getY());
-                assertEquals(Direction.S,positionTwo.getDirection());
-                assertEquals(13,positionThree.getX());
-                assertEquals(100,positionThree.getY());
-                assertEquals(Direction.W,positionThree.getDirection());
+                assertEquals(0,positionOne.x());
+                assertEquals(0,positionOne.y());
+                Assertions.assertEquals(Direction.N,positionOne.direction());
+                assertEquals(15,positionTwo.x());
+                assertEquals(14,positionTwo.y());
+                assertEquals(Direction.S,positionTwo.direction());
+                assertEquals(13,positionThree.x());
+                assertEquals(100,positionThree.y());
+                assertEquals(Direction.W,positionThree.direction());
             });
     }
 

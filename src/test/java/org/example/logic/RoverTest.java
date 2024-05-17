@@ -22,9 +22,9 @@ class RoverTest {
         Vehicle rover = new Rover(new Position(1, 2, Direction.N));
 
         assertAll(() -> {
-           assertEquals(1, rover.reportPosition().getX());
-           assertEquals(2, rover.reportPosition().getY());
-           assertEquals(Direction.N, rover.reportPosition().getDirection());
+           assertEquals(1, rover.reportPosition().x());
+           assertEquals(2, rover.reportPosition().y());
+           assertEquals(Direction.N, rover.reportPosition().direction());
         });
     }
 
@@ -40,24 +40,24 @@ class RoverTest {
         Rover rover = new Rover(new Position(1, 2, Direction.N));
 
         rover.executeMovementInstructions(moveOne);
-        assertEquals(1, rover.reportPosition().getX());
-        assertEquals(3, rover.reportPosition().getY());
-        assertEquals(Direction.N, rover.reportPosition().getDirection());
+        assertEquals(1, rover.reportPosition().x());
+        assertEquals(3, rover.reportPosition().y());
+        assertEquals(Direction.N, rover.reportPosition().direction());
 
         rover.executeMovementInstructions(moveTwo);
-        assertEquals(1, rover.reportPosition().getX());
-        assertEquals(6, rover.reportPosition().getY());
-        assertEquals(Direction.N, rover.reportPosition().getDirection());
+        assertEquals(1, rover.reportPosition().x());
+        assertEquals(6, rover.reportPosition().y());
+        assertEquals(Direction.N, rover.reportPosition().direction());
 
         rover.executeMovementInstructions(moveThree);
-        assertEquals(3, rover.reportPosition().getX());
-        assertEquals(6, rover.reportPosition().getY());
-        assertEquals(Direction.N, rover.reportPosition().getDirection());
+        assertEquals(3, rover.reportPosition().x());
+        assertEquals(6, rover.reportPosition().y());
+        assertEquals(Direction.N, rover.reportPosition().direction());
 
         rover.executeMovementInstructions(moveFour);
-        assertEquals(3, rover.reportPosition().getX());
-        assertEquals(4, rover.reportPosition().getY());
-        assertEquals(Direction.S, rover.reportPosition().getDirection());
+        assertEquals(3, rover.reportPosition().x());
+        assertEquals(4, rover.reportPosition().y());
+        assertEquals(Direction.S, rover.reportPosition().direction());
 
     }
 }

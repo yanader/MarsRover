@@ -13,8 +13,8 @@ public class Rover extends Vehicle implements Movable{
             if (instruction == Instruction.M) {
                 super.setPosition(moveForwards(this.reportPosition()));
             } else {
-                Direction newDirection = rotate(this.reportPosition().getDirection(), instruction);
-                super.setPosition(new Position(this.reportPosition().getX(), this.reportPosition().getY(), newDirection));
+                Direction newDirection = rotate(this.reportPosition().direction(), instruction);
+                super.setPosition(new Position(this.reportPosition().x(), this.reportPosition().y(), newDirection));
             }
         }
     }
@@ -35,14 +35,14 @@ public class Rover extends Vehicle implements Movable{
     }
 
     protected Position moveForwards(Position currentPosition) {
-        int currentX = currentPosition.getX();
-        int currentY = currentPosition.getY();
-        Direction currentDirection = currentPosition.getDirection();
+        int currentX = currentPosition.x();
+        int currentY = currentPosition.y();
+        Direction currentDirection = currentPosition.direction();
 
-        if (currentPosition.getDirection() == Direction.W) return new Position(currentX - 1, currentY, currentDirection);
-        if (currentPosition.getDirection() == Direction.S) return new Position(currentX, currentY - 1, currentDirection);
-        if (currentPosition.getDirection() == Direction.E) return new Position(currentX + 1, currentY, currentDirection);
-        if (currentPosition.getDirection() == Direction.N) return new Position(currentX, currentY + 1, currentDirection);
+        if (currentPosition.direction() == Direction.W) return new Position(currentX - 1, currentY, currentDirection);
+        if (currentPosition.direction() == Direction.S) return new Position(currentX, currentY - 1, currentDirection);
+        if (currentPosition.direction() == Direction.E) return new Position(currentX + 1, currentY, currentDirection);
+        if (currentPosition.direction() == Direction.N) return new Position(currentX, currentY + 1, currentDirection);
         return null;
     }
 
