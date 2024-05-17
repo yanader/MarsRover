@@ -9,6 +9,7 @@ import org.example.parsers.InstructionParser;
 import org.example.parsers.SetupInputParser;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class CommandCentre {
@@ -36,12 +37,28 @@ public class CommandCentre {
                     dropVehicle();
                     continue;
                 case 2:
-                    // activateVehicle();
+                    activateVehicle();
                     continue;
                 case 3:
                     Instruction[] instructions = takeInstruction();
                     executeInstruction(activeVehicle, instructions);
             }
+        }
+    }
+
+    private void activateVehicle() {
+        List<Vehicle> vehicleList = plateau.getVehicles();
+        while (true) {
+            System.out.println("Please select a vehicle by number");
+            for (int i = 0; i < vehicleList.size(); i++) {
+                System.out.println("\t" + (i + 1) + ". Type: " + vehicleList.get(i).getClass().getSimpleName() + " | " + vehicleList.get(i).shortPosition());
+            }
+            try {
+                int choice = Integer.parseInt(scanner.nextLine());
+                if (choice < 1 || choice > vehicleList.size()) continue;
+                activeVehicle = vehicleList.get(choice - 1);
+                return;
+            } catch (Exception ignore) {}
         }
     }
 

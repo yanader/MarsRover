@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 public enum Resource {
-    SALT(10, "Sale"),
+    SALT(10, "Salt"),
     GOLD(3, "Gold"),
     SILVER(7, "Silver"),
     IRON(10, "Iron"),

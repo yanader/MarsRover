@@ -17,4 +17,10 @@ public abstract class Vehicle {
         this.position = position;
     }
 
+    public String shortPosition() {
+        return "Position: x -> " + this.reportPosition().x() + " | y -> "
+                + this.reportPosition().y() + " | direction -> "
+                + this.reportPosition().direction().toString();
+    }
+
 }
