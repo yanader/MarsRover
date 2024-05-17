@@ -1,5 +1,19 @@
 MVP achieved
 
+
+Done
 1) README
 2) Implement truncation of instructions
-3) new vehicle type (with Digable) interface
+
+
+
+
+TODO
+-) new vehicle type (with Diggable) interface
+-) Plateau.getVehicles() - use this to allow the commandcentre to
+    offer an option for the user to pick a vehicle to control
+-) CommandCentre to allow ui options to dig. (Might be straightforward - need to double check access modifiers)
+-) CommandCentre.chooseOption()
+    This will allow the user to choose between moving the active vehicle, swapping vehicles or landing another vehicle
+-) remove vehicle
+-) Interface Scannable with a class that can scan for resources
