@@ -1,13 +1,16 @@
 package org.example.parsers;
 
 import org.example.dataclasses.Instruction;
+import org.example.logic.Movable;
+import org.example.logic.Vehicle;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InstructionParser {
 
-    public static Instruction[] createMovementInstructionList(String input) throws IllegalArgumentException {
+    public static Instruction[] createMovementInstructionList(String input, Vehicle vehicle) throws IllegalArgumentException {
+        if (vehicle.getClass().getInterfaces()[0] != Movable.class) throw new IllegalArgumentException("Incorrect vehicle type for movement instructions");
         if (!createMovementInstructionListInputIsValid(input)) {
             throw new IllegalArgumentException("Invalid input. L/R/M accepted");
         }

@@ -101,7 +101,7 @@ public class CommandCentre {
                 return null;
             }
             try {
-                return InstructionParser.createMovementInstructionList(input);
+                return InstructionParser.createMovementInstructionList(input, activeVehicle);
             } catch (IllegalArgumentException e) {
                 System.out.println("Invalid instruction input");
             }
