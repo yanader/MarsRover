@@ -16,9 +16,14 @@ The rover maintains its position which consists of an X coordinate, a Y coordina
 
 ### Instructions
 
+
 To start the programme, navigate via terminal to the location of MarsRover.jar and execute with
 
 > `java -jar MarsRover.jar`
+
+or specify the filepath from your current location with
+
+> `java -jar jarfiles/MarsRover.jar`
 
 This will provide you with a custom-built Command Centre which will allow you to control the Mars Rover.
 
