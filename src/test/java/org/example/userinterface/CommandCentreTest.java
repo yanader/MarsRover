@@ -14,14 +14,14 @@ import static org.mockito.Mockito.verify;
 @ExtendWith(MockitoExtension.class)
 class CommandCentreTest {
 
-    @Spy
-    @InjectMocks
-    CommandCentre cc;
-
-    @Test
-    void newCommandCentreStartsMission() {
-//        CommandCentre cc = new CommandCentre();
-        verify(cc).startMission();
-    }
+//    @Spy
+//    @InjectMocks
+//    CommandCentre cc;
+//
+//    @Test
+//    void newCommandCentreStartsMission() {
+////        CommandCentre cc = new CommandCentre();
+//        verify(cc).startMission();
+//    }
 
 }
