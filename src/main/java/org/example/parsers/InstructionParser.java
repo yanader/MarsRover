@@ -1,6 +1,7 @@
 package org.example.parsers;
 
 import org.example.dataclasses.Instruction;
+import org.example.logic.Diggable;
 import org.example.logic.Movable;
 import org.example.logic.Vehicle;
 
@@ -24,6 +25,12 @@ public class InstructionParser {
     private static boolean createMovementInstructionListInputIsValid(String input) {
         Matcher matcher = Pattern.compile("^[RLM]+$").matcher(input);
         return matcher.find();
+    }
+
+    public static Instruction createDigInstructionFromInput(String input, Vehicle vehicle) throws IllegalArgumentException {
+        if (vehicle.getClass().getInterfaces()[0] != Diggable.class) throw new IllegalArgumentException("Incorrect vehicle type for digging instructions");
+        if (input.equalsIgnoreCase("D")) return Instruction.D;
+        throw new IllegalArgumentException("Instruction invalid.");
     }
 
     private static Instruction convertCharToInstruction(char c) {

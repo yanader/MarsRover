@@ -14,11 +14,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class InstructionParserTest {
 
     Vehicle rover;
+    Vehicle miner;
 
     @BeforeEach
     void setup() {
+        miner = new Miner(new Position(1, 1, Direction.S));
         rover = new Rover(new Position(0, 0, Direction.N));
     }
+
     @Test
     void createInstructionListReturnsMovementInstructionArray() {
         assertEquals(Instruction[].class, InstructionParser.createMovementInstructionList("LRM", rover).getClass());
@@ -48,12 +51,11 @@ class InstructionParserTest {
 
     @Test
     void createMovementInstructionThrowsWhenGivenWrongVehicleType() {
-        Vehicle nonMover = new Miner(new Position(1, 1, Direction.S));
 
         assertAll(() ->{
-            assertThrows(IllegalArgumentException.class, () -> InstructionParser.createMovementInstructionList("LMR", nonMover));
-            assertThrows(IllegalArgumentException.class, () -> InstructionParser.createMovementInstructionList("MMM", nonMover));
-            assertThrows(IllegalArgumentException.class, () -> InstructionParser.createMovementInstructionList("RRR", nonMover));
+            assertThrows(IllegalArgumentException.class, () -> InstructionParser.createMovementInstructionList("LMR", miner));
+            assertThrows(IllegalArgumentException.class, () -> InstructionParser.createMovementInstructionList("MMM", miner));
+            assertThrows(IllegalArgumentException.class, () -> InstructionParser.createMovementInstructionList("RRR", miner));
         });
     }
 
@@ -68,5 +70,20 @@ class InstructionParserTest {
            assertArrayEquals(testInstructionSetTwo, InstructionParser.createMovementInstructionList("MMM", rover));
            assertArrayEquals(testInstructionSetThree, InstructionParser.createMovementInstructionList("M", rover));
         });
+    }
+
+    @Test
+    void createDigInstructionThrowsWithIncorrectInputs() {
+
+        assertAll(() -> {
+            assertThrows(IllegalArgumentException.class, () -> InstructionParser.createDigInstructionFromInput("D", rover));
+            assertThrows(IllegalArgumentException.class, () -> InstructionParser.createDigInstructionFromInput("DD", miner));
+            assertThrows(IllegalArgumentException.class, () -> InstructionParser.createDigInstructionFromInput("MMLM", miner));
+        });
+    }
+
+    @Test
+    void createDigInstructionAcceptsCorrectInputs() {
+        assertDoesNotThrow(() -> InstructionParser.createDigInstructionFromInput("D", miner));
     }
 }
