@@ -22,7 +22,7 @@ To start the programme, run Main.java. This will provide you with a custom built
    1. Provide the size of the Plateau to be explored in the format "X Y" where X and Y are positive integers.
    2. Provide the starting position of the Rover in the format "X Y D" where:
       - X -> initial x coordinate from 0 to the length of the X axis minus 1
-      - Y -> initial y coordinate from 0 to the length of the X axis minus 1
+      - Y -> initial y coordinate from 0 to the length of the Y axis minus 1
       - D -> initial direction the rover is facing where D is one of the four cardinal directions (N/E/S/W)
 2. Further Instructions
    1. Provide the Rover with movement instructions with three uppercase characters.
