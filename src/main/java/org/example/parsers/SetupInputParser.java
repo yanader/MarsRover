@@ -38,11 +38,13 @@ public class SetupInputParser {
     }
 
     private static Direction getDirection(String direction) {
-        if(direction.equals("N")) return Direction.N;
-        if(direction.equals("E")) return Direction.E;
-        if(direction.equals("S")) return Direction.S;
-        if(direction.equals("W")) return Direction.W;
-        return null;
+        return switch (direction) {
+            case "N" -> Direction.N;
+            case "E" -> Direction.E;
+            case "S" -> Direction.S;
+            case "W" -> Direction.W;
+            default -> null;
+        };
     }
 
 }
