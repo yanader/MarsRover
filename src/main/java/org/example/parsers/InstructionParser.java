@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class InstructionParser {
 
-    public static Instruction[] createInstructionList(String input) {
+    public static Instruction[] createInstructionList(String input) throws IllegalArgumentException {
         if (!createInstructionListInputIsValid(input)) {
             throw new IllegalArgumentException("Invalid input. L/R/M accepted");
         }

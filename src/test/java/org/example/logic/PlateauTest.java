@@ -92,7 +92,7 @@ class PlateauTest {
            assertFalse(plateau.instructionSetIsPossible(rover, falseSetOne));
            assertFalse(plateau.instructionSetIsPossible(rover, falseSetTwo));
            assertFalse(plateau.instructionSetIsPossible(rover, falseSetThree));
-           
+
         });
     }
 }
