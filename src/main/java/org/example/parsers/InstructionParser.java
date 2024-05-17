@@ -27,9 +27,9 @@ public class InstructionParser {
         return matcher.find();
     }
 
-    public static Instruction createDigInstructionFromInput(String input, Vehicle vehicle) throws IllegalArgumentException {
+    public static Instruction[] createDigInstructionFromInput(String input, Vehicle vehicle) throws IllegalArgumentException {
         if (vehicle.getClass().getInterfaces()[0] != Diggable.class) throw new IllegalArgumentException("Incorrect vehicle type for digging instructions");
-        if (input.equalsIgnoreCase("D")) return Instruction.D;
+        if (input.equalsIgnoreCase("D")) return new Instruction[]{Instruction.D};
         throw new IllegalArgumentException("Instruction invalid.");
     }
 

@@ -8,6 +8,12 @@ In Progress
 -) new vehicle type (with Diggable) interface (branch -Miner)
 -) On landing a new vehicle, check the space is empty
 
+In command-centre - drop vehicle needs to ask for the type of vehicle to drop
+implement activate vehicle.
+
+
+CLEAN UP USER INTERFACE -- too much text
+
 TODO
 -) Plateau.getVehicles() - use this to allow the command-centre to
     offer an option for the user to pick a vehicle to control
