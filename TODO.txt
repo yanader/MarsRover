@@ -6,10 +6,10 @@ Done
 
 In Progress
 -) new vehicle type (with Diggable) interface (branch -Miner)
-
+-) On landing a new vehicle, check the space is empty
 
 TODO
--) Plateau.getVehicles() - use this to allow the commandcentre to
+-) Plateau.getVehicles() - use this to allow the command-centre to
     offer an option for the user to pick a vehicle to control
 -) CommandCentre to allow ui options to dig. (Might be straightforward - need to double check access modifiers)
 -) CommandCentre.chooseOption()

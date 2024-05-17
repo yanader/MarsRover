@@ -3,10 +3,7 @@ package org.example.userinterface;
 import org.example.dataclasses.Instruction;
 import org.example.dataclasses.PlateauSize;
 import org.example.dataclasses.Position;
-import org.example.logic.Movable;
-import org.example.logic.Plateau;
-import org.example.logic.Vehicle;
-import org.example.logic.Rover;
+import org.example.logic.*;
 import org.example.parsers.InstructionParser;
 import org.example.parsers.SetupInputParser;
 
@@ -33,7 +30,7 @@ public class CommandCentre {
                 return;
             }
             if (plateau != null) {
-                if (activeVehicle == null) dropRover();
+                if (activeVehicle == null) dropVehicle();
                 if (plateau.movementSetIsPossible(activeVehicle, instructions)) {
                     executeInstruction(activeVehicle, instructions);
 //                    System.out.println("Vehicle type: " + activeVehicle.getClass().getSimpleName() + " now at " + activeVehicle.reportPosition());
@@ -50,7 +47,7 @@ public class CommandCentre {
 
     private void missionSetup() {
         createPlateau();
-        dropRover();
+        dropVehicle();
     }
 
     private void createPlateau() {
@@ -69,7 +66,7 @@ public class CommandCentre {
         }
     }
 
-    private void dropRover() {
+    private void dropVehicle() {
         while (true) {
             System.out.println("Input vehicle drop site. (Format: X Y D)");
             System.out.println("X -> X Coordinate");
@@ -84,6 +81,8 @@ public class CommandCentre {
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println("Invalid input for initial position");
+            } catch (PositionOccupiedException e) {
+                System.out.println(e.getMessage());
             }
         }
     }

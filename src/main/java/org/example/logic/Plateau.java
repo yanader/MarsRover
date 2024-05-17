@@ -17,8 +17,15 @@ public class Plateau {
         this.vehicles = new ArrayList<>();
     }
 
-    public void landVehicle(Vehicle vehicle) {
+    public void landVehicle(Vehicle vehicle) throws PositionOccupiedException {
+        if (!isEmpty(vehicle.reportPosition().x(), vehicle.reportPosition().y())) {
+            throw new PositionOccupiedException("That position is occupied");
+        }
         vehicles.add(vehicle);
+    }
+
+    public List<Vehicle> getVehicles() {
+        return vehicles;
     }
 
     public boolean isEmpty(int x, int y) throws IllegalArgumentException {
