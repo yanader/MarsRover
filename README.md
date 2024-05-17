@@ -45,7 +45,11 @@ This will provide you with a custom-built Command Centre which will allow you to
           - Moves forward two spaces
           - Rotates Left
           - Moves forward two spaces
-      - If the user provides instructions that would cause a collision or lead the Rover off the edge of the Plateau, the instruction will be rejected and the user will be informed
+      - On providing an instructions set  that would cause a collision or lead the Rover off the edge of the Plateau:
+        - If the first step of the instructions caused the collision, the user will be informed the instruction can not be carried out.
+        - If a subset of instructions would be valid, the user will be offered a truncated version of their instructions and asked for an input.
+          - Y -> Execute the truncated instructions
+          - N -> Reject the truncation and resume the programme.
    2. Input 'H' to access help
    3. Input 'Q' to quit the Mars Rover Application
 
