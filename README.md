@@ -6,17 +6,17 @@ Welcome to Mars. This programme will allow you to deploy a Rover and explore the
 
 ### The Plateau
 
-The Plateau is represented by a two dimensional grid of size x * y. These sizes are provided by the user and create a grid with coordinates (0, 0) through to (x -1, y - 1).
+The Plateau is represented by a two-dimensional grid of size x * y. These sizes are provided by the user and create a grid with coordinates (0, 0) through to (x -1, y - 1).
 For the purpose of the simulation, (0, 0) is considered the South-West corner and (x-1, y-1) is considered the North-East corner.
 
 ### The Rover
 
 The Rover is a vehicle that will have its initial position dictated by the user and then be given move instructions that will allow it to navigate the plateau.
-The rover maintains its position which consists of an X coordinate, a Y coordinate and the cardinal compass direction it is currently facing (NESW).
+The rover maintains its position which consists of an X coordinate, a Y coordinate and the cardinal compass direction it is currently facing (N/E/S/W).
 
 ### Instructions
 
-To start the programme, run Main.java. This will provide you with a custom built Command Centre which will allow you to control the Mars Rover.
+To start the programme, run Main.java. This will provide you with a custom-built Command Centre which will allow you to control the Mars Rover.
 
 1. Setup
    1. Provide the size of the Plateau to be explored in the format "X Y" where X and Y are positive integers.
@@ -38,7 +38,7 @@ To start the programme, run Main.java. This will provide you with a custom built
           - Moves forward two spaces
       - If the user provides instructions that would cause a collision or lead the Rover off the edge of the Plateau, the instruction will be rejected and the user will be informed
    2. Input 'H' to access help
-   3. Input 'Q' to quit the mars Rover Application
+   3. Input 'Q' to quit the Mars Rover Application
 
 
 ### Documentation
@@ -46,7 +46,7 @@ To start the programme, run Main.java. This will provide you with a custom built
 The codebase is split into several packages as follows:
 
 1. dataclasses - provides Classes and Enums to dictate PlateauSizes, Vehicle positions, cardinal directions and allowed instructions
-2. parsers - provides Classes for validating and parsing userinputs including conversion from String to Instruction[]
+2. parsers - provides Classes for validating and parsing user inputs including conversion from String to Instruction[]
 3. logic - provides Classes for Plateau and vehicle types as well as interfaces to dictate vehicle behaviours. Any new vehicle type should extend Vehicle and implement appropriate interfaces
 4. userinterface - provides the CommandCentre class which initialises the programme, controls setup and continued programme flow until the user exits.
 
