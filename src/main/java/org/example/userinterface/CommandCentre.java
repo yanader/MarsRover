@@ -34,7 +34,7 @@ public class CommandCentre {
             }
             if (plateau != null) {
                 if (activeVehicle == null) dropRover();
-                if (plateau.instructionSetIsPossible(activeVehicle, instructions)) {
+                if (plateau.movementSetIsPossible(activeVehicle, instructions)) {
                     executeInstruction(activeVehicle, instructions);
 //                    System.out.println("Vehicle type: " + activeVehicle.getClass().getSimpleName() + " now at " + activeVehicle.reportPosition());
                 } else {
@@ -132,7 +132,7 @@ public class CommandCentre {
 
 
     private Instruction[] truncateInstruction(Vehicle vehicle, Instruction[] instructions) {
-        return plateau.truncateInstructions(vehicle, instructions);
+        return plateau.truncateMovementInstructions(vehicle, instructions);
     }
 
     private void offerTruncatedInstructionsAsMove(Vehicle vehicle, Instruction[] instructions) {

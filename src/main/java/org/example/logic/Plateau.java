@@ -6,7 +6,6 @@ import org.example.dataclasses.PlateauSize;
 import org.example.dataclasses.Position;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Plateau {
@@ -34,7 +33,7 @@ public class Plateau {
         return true;
     }
 
-    public boolean instructionSetIsPossible(Vehicle vehicle, Instruction[] instructions) {
+    public boolean movementSetIsPossible(Vehicle vehicle, Instruction[] instructions) {
         Rover proxyRover = new Rover(new Position(vehicle.reportPosition().x(), vehicle.reportPosition().y(), vehicle.reportPosition().direction()));
         for (Instruction instruction : instructions) {
             if (instruction == Instruction.L || instruction == Instruction.R) {
@@ -50,7 +49,7 @@ public class Plateau {
         return true;
     }
 
-    public Instruction[] truncateInstructions(Vehicle vehicle, Instruction[] instructions) {
+    public Instruction[] truncateMovementInstructions(Vehicle vehicle, Instruction[] instructions) {
         List<Instruction> truncatedInstructionSet = new ArrayList<>();
         Rover proxyRover = new Rover(new Position(vehicle.reportPosition().x(), vehicle.reportPosition().y(), vehicle.reportPosition().direction()));
         for (Instruction instruction : instructions) {

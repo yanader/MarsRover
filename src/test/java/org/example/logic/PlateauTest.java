@@ -73,7 +73,7 @@ class PlateauTest {
     }
 
     @Test
-    void instructionSetIsPossibleReturnsCorrectBoolean() {
+    void movementSetIsPossibleReturnsCorrectBoolean() {
         Plateau plateau = new Plateau(new PlateauSize(10, 10));
         Vehicle rover = new Rover(new Position(0, 0, Direction.N));
         plateau.landVehicle(rover);
@@ -86,13 +86,25 @@ class PlateauTest {
 
 
         assertAll(() -> {
-           assertTrue(plateau.instructionSetIsPossible(rover, trueSetOne));
-           assertTrue(plateau.instructionSetIsPossible(rover, trueSetTwo));
-           assertTrue(plateau.instructionSetIsPossible(rover, trueSetThree));
-           assertFalse(plateau.instructionSetIsPossible(rover, falseSetOne));
-           assertFalse(plateau.instructionSetIsPossible(rover, falseSetTwo));
-           assertFalse(plateau.instructionSetIsPossible(rover, falseSetThree));
+           assertTrue(plateau.movementSetIsPossible(rover, trueSetOne));
+           assertTrue(plateau.movementSetIsPossible(rover, trueSetTwo));
+           assertTrue(plateau.movementSetIsPossible(rover, trueSetThree));
+           assertFalse(plateau.movementSetIsPossible(rover, falseSetOne));
+           assertFalse(plateau.movementSetIsPossible(rover, falseSetTwo));
+           assertFalse(plateau.movementSetIsPossible(rover, falseSetThree));
 
+        });
+    }
+
+    @Test
+    void plateauAcceptsVehiclesOfMultipleSubTypes() {
+        Plateau plateau = new Plateau(new PlateauSize(10, 10));
+        Vehicle rover = new Rover(new Position(0, 0, Direction.N));
+        Vehicle miner = new Miner(new Position(1, 1, Direction.N));
+
+        assertAll(() -> {
+            assertDoesNotThrow(() -> plateau.landVehicle(rover));
+            assertDoesNotThrow(() -> plateau.landVehicle(miner));
         });
     }
 }
