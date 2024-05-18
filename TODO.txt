@@ -1,5 +1,29 @@
-MVP achieved
+Done
+-) MVP achieved
+-) README
+-) Implement truncation of instructions
+-) In command-centre - drop vehicle needs to ask for the type of vehicle to drop
+-) On landing a new vehicle, check the space is empty
+-) new vehicle type (with Diggable) interface (branch -Miner)
+-) implement activate vehicle.
+-) Plateau.getVehicles() - use this to allow the command-centre to
+    offer an option for the user to pick a vehicle to control
+-) CommandCentre.chooseOption()
+    This will allow the user to choose between moving the active vehicle, swapping vehicles or landing another vehicle
 
-1) README
-2) Implement truncation of instructions
-3) new vehicle type (with Digable) interface
+NEXT
+
+-) CommandCentre to allow ui options to dig. (Might be straightforward - need to double check access modifiers)
+This works but the UI options surrounding it, text outputs and Help need updating
+CLEAN UP USER INTERFACE -- too much text
+
+
+-) merge Miner branch to main - do this before refactoring?
+
+
+TODO
+
+-) remove vehicle
+-) Interface Scannable with a class that can scan for resources
+-) refactor logic around checking movement instructions/offering truncated instructions (too much repetition)
+-) refactor everything
