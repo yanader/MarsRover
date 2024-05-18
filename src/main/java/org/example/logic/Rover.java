@@ -27,7 +27,7 @@ public class Rover extends Vehicle implements Movable{
         for (Instruction instruction : instructions) {
             if (instruction == Instruction.L || instruction == Instruction.R) {
                 rotate((DirectionalPosition) proxyRover.getPosition(), instruction);
-            } else if (instruction == Instruction.M && !plateau.moveForwardIsPossible(proxyRover)) {
+            } else if (instruction == Instruction.M && !moveForwardIsPossible(proxyRover.getPosition(), plateau)) {
                 return false;
             } else {
                 stepForwards((DirectionalPosition) proxyRover.getPosition());
@@ -36,7 +36,7 @@ public class Rover extends Vehicle implements Movable{
         return true;
     }
 
-    public Instruction[] truncateMovementSet(Plateau plateau, Instruction[] instructions) {
+    Instruction[] truncateMovementSet(Plateau plateau, Instruction[] instructions) {
         List<Instruction> truncatedInstructionsList = new ArrayList<>();
         Rover proxyRover = new Rover(new DirectionalPosition(this.getX(), this.getY(), this.getDirection()));
         for (Instruction instruction: instructions) {
