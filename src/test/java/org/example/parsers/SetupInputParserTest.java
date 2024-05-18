@@ -87,15 +87,15 @@ class SetupInputParserTest {
             Position positionThree = SetupInputParser.createInitialPosition("13 100 W");
 
             assertAll(() -> {
-                assertEquals(0,positionOne.x());
-                assertEquals(0,positionOne.y());
-                Assertions.assertEquals(Direction.N,positionOne.direction());
-                assertEquals(15,positionTwo.x());
-                assertEquals(14,positionTwo.y());
-                assertEquals(Direction.S,positionTwo.direction());
-                assertEquals(13,positionThree.x());
-                assertEquals(100,positionThree.y());
-                assertEquals(Direction.W,positionThree.direction());
+                assertEquals(0,positionOne.getX());
+                assertEquals(0,positionOne.getY());
+                Assertions.assertEquals(Direction.N,positionOne.getDirection());
+                assertEquals(15,positionTwo.getX());
+                assertEquals(14,positionTwo.getY());
+                assertEquals(Direction.S,positionTwo.getDirection());
+                assertEquals(13,positionThree.getX());
+                assertEquals(100,positionThree.getY());
+                assertEquals(Direction.W,positionThree.getDirection());
             });
     }
 

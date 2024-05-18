@@ -12,12 +12,12 @@ class PositionTest {
         Position positionTwo = new Position(10, 11, Direction.S);
 
         assertAll(() -> {
-            assertEquals(5, positionOne.x());
-            assertEquals(4, positionOne.y());
-            assertEquals(Direction.N, positionOne.direction());
-            assertEquals(10, positionTwo.x());
-            assertEquals(11, positionTwo.y());
-            assertEquals(Direction.S, positionTwo.direction());
+            assertEquals(5, positionOne.getX());
+            assertEquals(4, positionOne.getY());
+            assertEquals(Direction.N, positionOne.getDirection());
+            assertEquals(10, positionTwo.getX());
+            assertEquals(11, positionTwo.getY());
+            assertEquals(Direction.S, positionTwo.getDirection());
         });
     }
 

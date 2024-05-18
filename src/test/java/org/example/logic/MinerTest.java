@@ -22,9 +22,9 @@ class MinerTest {
         Vehicle miner = new Miner(new Position(1, 2, Direction.N));
 
         assertAll(() -> {
-           assertEquals(1, miner.getPosition().x());
-           assertEquals(2, miner.getPosition().y());
-           assertEquals(Direction.N, miner.getPosition().direction());
+           assertEquals(1, miner.getPosition().getX());
+           assertEquals(2, miner.getPosition().getY());
+           assertEquals(Direction.N, miner.getPosition().getDirection());
         });
     }
 
