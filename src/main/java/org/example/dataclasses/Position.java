@@ -1,9 +1,9 @@
 package org.example.dataclasses;
 
-public final class Position {
+public class Position {
     private int x;
     private int y;
-    private Direction direction;
+
 
     public Position(int x, int y, Direction direction) {
         if (x < 0 || y < 0) {
@@ -11,7 +11,7 @@ public final class Position {
         }
         this.x = x;
         this.y = y;
-        this.direction = direction;
+
     }
 
     public void setX(int x) {
@@ -22,10 +22,6 @@ public final class Position {
         this.y = y;
     }
 
-    public void setDirection(Direction direction) {
-        this.direction = direction;
-    }
-
     public int getX() {
         return x;
     }
@@ -34,12 +30,8 @@ public final class Position {
         return y;
     }
 
-    public Direction getDirection() {
-        return direction;
-    }
-
     @Override
     public String toString() {
-        return "Position: x -> " + x + " | y -> " + y + " | direction -> " + direction;
+        return "Position: x -> " + x + " | y -> " + y;
     }
 }
