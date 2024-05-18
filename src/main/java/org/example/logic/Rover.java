@@ -3,47 +3,48 @@ package org.example.logic;
 import org.example.dataclasses.*;
 
 public class Rover extends Vehicle implements Movable{
+//    private DirectionalPosition directionalPosition;
 
-    public Rover(Position position) {
-        super(position);
+    public Rover(DirectionalPosition directionalPosition) {
+        super(directionalPosition);
+//        this.directionalPosition = directionalPosition;
     }
 
     public void move(Instruction[] instructions) {
         for (Instruction instruction : instructions) {
             if (instruction == Instruction.M) {
-                super.setPosition(moveForwards(this.getPosition()));
+                this.moveForwards((DirectionalPosition) super.getPosition());
             } else {
-                Direction newDirection = rotate(this.getPosition().getDirection(), instruction);
-                super.setPosition(new Position(this.getPosition().getX(), this.getPosition().getY(), newDirection));
+                this.rotate((DirectionalPosition) super.getPosition(), instruction);
             }
         }
     }
 
-    // Although the move() method is contracted due to Rover implementing Movable, there
-    // private methods will be used to implements Rover's specific implementation of move()
-    protected Direction rotate(Direction currentDirection, Instruction rotationalDirection) {
-        if (currentDirection == Direction.N) {
-            return rotationalDirection == Instruction.L ? Direction.W : Direction.E;
-        } else if (currentDirection == Direction.E) {
-            return rotationalDirection == Instruction.L ? Direction.N : Direction.S;
-        } else if (currentDirection == Direction.S) {
-            return rotationalDirection == Instruction.L ? Direction.E : Direction.W;
-        } else if (currentDirection == Direction.W) {
-            return rotationalDirection == Instruction.L ? Direction.S : Direction.N;
+    private void rotate(DirectionalPosition currentPosition, Instruction rotationalDirection) {
+        if (currentPosition.getDirection() == Direction.N) {
+            currentPosition.setDirection(rotationalDirection == Instruction.L ? Direction.W : Direction.E);
+        } else if (currentPosition.getDirection() == Direction.E) {
+            currentPosition.setDirection(rotationalDirection == Instruction.L ? Direction.N : Direction.S);
+        } else if (currentPosition.getDirection() == Direction.S) {
+            currentPosition.setDirection(rotationalDirection == Instruction.L ? Direction.E : Direction.W);
+        } else if (currentPosition.getDirection() == Direction.W) {
+            currentPosition.setDirection(rotationalDirection == Instruction.L ? Direction.S : Direction.N);
         }
-        return null;
     }
 
-    protected Position moveForwards(Position currentPosition) {
-        int currentX = currentPosition.getX();
-        int currentY = currentPosition.getY();
-        Direction currentDirection = currentPosition.getDirection();
-
-        if (currentPosition.getDirection() == Direction.W) return new Position(currentX - 1, currentY, currentDirection);
-        if (currentPosition.getDirection() == Direction.S) return new Position(currentX, currentY - 1, currentDirection);
-        if (currentPosition.getDirection() == Direction.E) return new Position(currentX + 1, currentY, currentDirection);
-        if (currentPosition.getDirection() == Direction.N) return new Position(currentX, currentY + 1, currentDirection);
-        return null;
+    private void moveForwards(DirectionalPosition currentPosition) {
+        if (currentPosition.getDirection() == Direction.N) {
+            currentPosition.setY(currentPosition.getY() + 1);
+        }
+        if (currentPosition.getDirection() == Direction.S) {
+            currentPosition.setY(currentPosition.getY() - 1);
+        }
+        if (currentPosition.getDirection() == Direction.E) {
+            currentPosition.setX(currentPosition.getX() + 1);
+        }
+        if (currentPosition.getDirection() == Direction.W) {
+            currentPosition.setX(currentPosition.getX() - 1);
+        }
     }
 
 
