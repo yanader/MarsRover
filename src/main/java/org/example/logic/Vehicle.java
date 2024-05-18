@@ -9,7 +9,7 @@ public abstract class Vehicle {
         this.position = position;
     }
 
-    public Position reportPosition() {
+    public Position getPosition() {
         return this.position;
     }
 
@@ -17,7 +17,7 @@ public abstract class Vehicle {
         this.position = position;
     }
 
-    public String shortPosition() {
+    public String outputPosition() {
         return this.position.toString();
     }
 

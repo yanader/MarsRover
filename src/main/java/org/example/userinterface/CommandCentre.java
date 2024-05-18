@@ -51,7 +51,7 @@ public class CommandCentre {
         while (true) {
             System.out.println("Please select a vehicle by number");
             for (int i = 0; i < vehicleList.size(); i++) {
-                System.out.println("\t" + (i + 1) + ". Type: " + vehicleList.get(i).getClass().getSimpleName() + " | " + vehicleList.get(i).shortPosition());
+                System.out.println("\t" + (i + 1) + ". Type: " + vehicleList.get(i).getClass().getSimpleName() + " | " + vehicleList.get(i).outputPosition());
             }
             try {
                 int choice = Integer.parseInt(scanner.nextLine());
@@ -118,7 +118,7 @@ public class CommandCentre {
                 if (vehicle == null) continue;
                 plateau.landVehicle(vehicle);
                 this.activeVehicle = vehicle;
-                System.out.println("Vehicle type: " + vehicle.getClass().getSimpleName() + " launched at " + vehicle.reportPosition());
+                System.out.println("Vehicle type: " + vehicle.getClass().getSimpleName() + " launched at " + vehicle.getPosition());
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println("Invalid input for initial position");
@@ -174,10 +174,10 @@ public class CommandCentre {
                 System.out.println("I'm sorry, this instruction set causes a collision and can not be executed.");
                 offerTruncatedInstructionsAsMove(activeVehicle, instructions);
             }
-            System.out.println("Vehicle type: " + activeVehicle.getClass().getSimpleName() + " now at " + activeVehicle.reportPosition());
+            System.out.println("Vehicle type: " + activeVehicle.getClass().getSimpleName() + " now at " + activeVehicle.getPosition());
         } else if (vehicle instanceof Diggable digger) {
             Resource resource = digger.dig();
-            System.out.println("Vehicle type: " + activeVehicle.getClass().getSimpleName() + " found " + resource.name() + " at " + activeVehicle.reportPosition());
+            System.out.println("Vehicle type: " + activeVehicle.getClass().getSimpleName() + " found " + resource.name() + " at " + activeVehicle.getPosition());
         }
     }
 
