@@ -6,4 +6,5 @@ public interface Movable {
 
     void move(Instruction[] instructions);
 
+    boolean testMovement(Plateau plateau, Instruction[] instructions);
 }

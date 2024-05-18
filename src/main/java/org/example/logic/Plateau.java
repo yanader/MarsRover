@@ -18,7 +18,7 @@ public class Plateau {
     }
 
     public void landVehicle(Vehicle vehicle) throws PositionOccupiedException {
-        if (!isEmpty(vehicle.getPosition().getX(), vehicle.getPosition().getY())) {
+        if (!isEmpty(vehicle.getX(), vehicle.getY())) {
             throw new PositionOccupiedException("That position is occupied");
         }
         vehicles.add(vehicle);
@@ -33,27 +33,15 @@ public class Plateau {
             throw new IllegalArgumentException("Invalid Position");
         }
         for (Vehicle vehicle:vehicles) {
-            if (vehicle.getPosition().getX() == x && vehicle.getPosition().getY() == y) {
+            if (vehicle.getX() == x && vehicle.getY() == y) {
                 return false;
             }
         }
         return true;
     }
 
-    public boolean movementSetIsPossible(Vehicle vehicle, Instruction[] instructions) {
-        Rover proxyRover = new Rover(new Position(vehicle.getPosition().getX(), vehicle.getPosition().getY(), vehicle.getPosition().getDirection()));
-        for (Instruction instruction : instructions) {
-            if (instruction == Instruction.L || instruction == Instruction.R) {
-                Direction newDirection = proxyRover.rotate(proxyRover.getPosition().getDirection(), instruction);
-                proxyRover.setPosition(new Position(proxyRover.getPosition().getX(), proxyRover.getPosition().getY(), newDirection));
-            } else if (instruction == Instruction.M && !moveForwardIsPossible(proxyRover)) {
-                return false;
-            } else {
-                Position newPosition = proxyRover.moveForwards(proxyRover.getPosition());
-                proxyRover.setPosition(newPosition);
-            }
-        }
-        return true;
+    public boolean movementSetIsPossible(Rover rover, Instruction[] instructions) {
+        return rover.testMovement(this, instructions);
     }
 
     public Instruction[] truncateMovementInstructions(Vehicle vehicle, Instruction[] instructions) {

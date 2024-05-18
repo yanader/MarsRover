@@ -3,21 +3,34 @@ package org.example.logic;
 import org.example.dataclasses.*;
 
 public class Rover extends Vehicle implements Movable{
-//    private DirectionalPosition directionalPosition;
 
     public Rover(DirectionalPosition directionalPosition) {
         super(directionalPosition);
-//        this.directionalPosition = directionalPosition;
     }
 
     public void move(Instruction[] instructions) {
         for (Instruction instruction : instructions) {
             if (instruction == Instruction.M) {
-                this.moveForwards((DirectionalPosition) super.getPosition());
+                this.stepForwards((DirectionalPosition) super.getPosition());
             } else {
                 this.rotate((DirectionalPosition) super.getPosition(), instruction);
             }
         }
+    }
+
+    public boolean testMovement(Plateau plateau, Instruction[] instructions) {
+        Rover proxyRover = new Rover(new DirectionalPosition(this.getX(), this.getY(), this.getDirection()));
+
+        for (Instruction instruction : instructions) {
+            if (instruction == Instruction.L || instruction == Instruction.R) {
+                rotate((DirectionalPosition) proxyRover.getPosition(), instruction);
+            } else if (instruction == Instruction.M && !plateau.moveForwardIsPossible(proxyRover)) {
+                return false;
+            } else {
+                stepForwards((DirectionalPosition) proxyRover.getPosition());
+            }
+        }
+        return true;
     }
 
     private void rotate(DirectionalPosition currentPosition, Instruction rotationalDirection) {
@@ -32,7 +45,7 @@ public class Rover extends Vehicle implements Movable{
         }
     }
 
-    private void moveForwards(DirectionalPosition currentPosition) {
+    private void stepForwards(DirectionalPosition currentPosition) {
         if (currentPosition.getDirection() == Direction.N) {
             currentPosition.setY(currentPosition.getY() + 1);
         }
@@ -47,7 +60,7 @@ public class Rover extends Vehicle implements Movable{
         }
     }
 
-
-
-
+    public Direction getDirection() {
+        return ((DirectionalPosition)super.getPosition()).getDirection();
+    }
 }
