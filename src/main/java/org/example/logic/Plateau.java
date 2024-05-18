@@ -40,6 +40,14 @@ public class Plateau {
         return true;
     }
 
+    public int getPlateauXSize() {
+        return this.plateauSize.plateauXSize();
+    }
+
+    public int getPlateauYSize() {
+        return this.plateauSize.plateauYSize();
+    }
+
     public boolean movementSetIsPossible(Rover rover, Instruction[] instructions) {
         return rover.testMovement(this, instructions);
     }
