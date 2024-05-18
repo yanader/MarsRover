@@ -48,7 +48,7 @@ public class Plateau {
         return this.plateauSize.plateauYSize();
     }
 
-    public boolean movementSetIsPossible(Rover rover, Instruction[] instructions) {
+    public boolean movementSetIsPossible(Movable rover, Instruction[] instructions) {
         return rover.testMovement(this, instructions);
     }
 

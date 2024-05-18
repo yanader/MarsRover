@@ -23,8 +23,8 @@ public class SetupInputParser {
         }
         String[] instructions = input.split(" ");
         return new Position(Integer.parseInt(instructions[0]),
-                Integer.parseInt(instructions[1]),
-                getDirection(instructions[2]));
+                Integer.parseInt(instructions[1]));//,
+//                getDirection(instructions[2]));  // This comment out is to make the programme compile while i test
     }
 
     private static boolean createPlateauSizeInputIsValid(String input) {

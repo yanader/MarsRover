@@ -13,6 +13,10 @@ Done
 
 NEXT
 
+-Refactored tests for dataclasses and logic.
+-Need to refactor tests for parsers
+    - and refactor the parsers themselves
+
 -) CommandCentre to allow ui options to dig. (Might be straightforward - need to double check access modifiers)
 This works but the UI options surrounding it, text outputs and Help need updating
 CLEAN UP USER INTERFACE -- too much text

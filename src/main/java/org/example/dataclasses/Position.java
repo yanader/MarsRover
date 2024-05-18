@@ -5,7 +5,7 @@ public class Position {
     private int y;
 
 
-    public Position(int x, int y, Direction direction) {
+    public Position(int x, int y) {
         if (x < 0 || y < 0) {
             throw new IllegalArgumentException("Position can not be negative");
         }

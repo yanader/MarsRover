@@ -11,5 +11,5 @@ public interface Movable {
 
     Instruction[] truncateMovementSet(Plateau plateau, Instruction[] instructions);
 
-    boolean moveForwardIsPossible(Position position, Plateau plateau);
+    boolean moveForwardIsPossible(DirectionalPosition position, Plateau plateau);
 }

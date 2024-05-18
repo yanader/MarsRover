@@ -27,7 +27,7 @@ public class Rover extends Vehicle implements Movable{
         for (Instruction instruction : instructions) {
             if (instruction == Instruction.L || instruction == Instruction.R) {
                 rotate((DirectionalPosition) proxyRover.getPosition(), instruction);
-            } else if (instruction == Instruction.M && !moveForwardIsPossible(proxyRover.getPosition(), plateau)) {
+            } else if (instruction == Instruction.M && !moveForwardIsPossible((DirectionalPosition)proxyRover.getPosition(), plateau)) {
                 return false;
             } else {
                 stepForwards((DirectionalPosition) proxyRover.getPosition());
@@ -36,17 +36,17 @@ public class Rover extends Vehicle implements Movable{
         return true;
     }
 
-    Instruction[] truncateMovementSet(Plateau plateau, Instruction[] instructions) {
+    public Instruction[] truncateMovementSet(Plateau plateau, Instruction[] instructions) {
         List<Instruction> truncatedInstructionsList = new ArrayList<>();
         Rover proxyRover = new Rover(new DirectionalPosition(this.getX(), this.getY(), this.getDirection()));
         for (Instruction instruction: instructions) {
             if (instruction == Instruction.L || instruction == Instruction.R) {
                 truncatedInstructionsList.add(instruction);
                 rotate((DirectionalPosition) proxyRover.getPosition(), instruction);
-            } else if (instruction == Instruction.M && moveForwardIsPossible(proxyRover.getPosition(), plateau)) {
+            } else if (instruction == Instruction.M && moveForwardIsPossible((DirectionalPosition)proxyRover.getPosition(), plateau)) {
                 truncatedInstructionsList.add(instruction);
                 stepForwards((DirectionalPosition) proxyRover.getPosition());
-            } else if (instruction == Instruction.M && !moveForwardIsPossible(proxyRover.getPosition(), plateau)) {
+            } else if (instruction == Instruction.M && !moveForwardIsPossible((DirectionalPosition)proxyRover.getPosition(), plateau)) {
                 break;
             }
         }
@@ -54,13 +54,18 @@ public class Rover extends Vehicle implements Movable{
         return truncatedInstructionsList.toArray(truncatedInstructionsArray);
     }
 
-    public boolean moveForwardIsPossible(Position position, Plateau plateau) {
+    public boolean moveForwardIsPossible(DirectionalPosition position, Plateau plateau) {
         int xInFront = position.getX();
         int yInFront = position.getY();
 
+        if (position.getDirection() == Direction.N) yInFront++;
+        if (position.getDirection() == Direction.S) yInFront--;
+        if (position.getDirection() == Direction.E) xInFront++;
+        if (position.getDirection() == Direction.W) xInFront--;
+
         if (xInFront < 0 || yInFront < 0 ||
                 xInFront > plateau.getPlateauXSize() - 1 ||
-                        yInFront > plateau.getPlateauYSize()) {
+                        yInFront > plateau.getPlateauYSize() - 1) {
         return false;
         }
         return plateau.isEmpty(xInFront, yInFront);

@@ -1,6 +1,5 @@
 package org.example.logic;
 
-import org.example.dataclasses.Direction;
 import org.example.dataclasses.Position;
 
 public abstract class Vehicle {

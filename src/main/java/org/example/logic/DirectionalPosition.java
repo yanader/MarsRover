@@ -7,7 +7,7 @@ public class DirectionalPosition extends Position {
     private Direction direction;
 
     public DirectionalPosition(int x, int y, Direction direction) {
-        super(x, y, direction);
+        super(x, y);
         this.direction = direction;
     }
 

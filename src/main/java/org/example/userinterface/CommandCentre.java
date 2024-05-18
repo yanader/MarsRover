@@ -1,9 +1,6 @@
 package org.example.userinterface;
 
-import org.example.dataclasses.Instruction;
-import org.example.dataclasses.PlateauSize;
-import org.example.dataclasses.Position;
-import org.example.dataclasses.Resource;
+import org.example.dataclasses.*;
 import org.example.logic.*;
 import org.example.parsers.InstructionParser;
 import org.example.parsers.SetupInputParser;
@@ -142,7 +139,7 @@ public class CommandCentre {
     }
 
     private Vehicle vehicleBuilder(int i, Position pos){
-        if (i == 1) return new Rover(pos);
+        if (i == 1) return new Rover(new DirectionalPosition(pos.getX(), pos.getY(), Direction.N));
         if (i == 2) return new Miner(pos);
         return null;
     }
@@ -168,7 +165,7 @@ public class CommandCentre {
 
     private void executeInstruction(Vehicle vehicle, Instruction[] instructions) {
         if (vehicle instanceof Movable mover) {
-            if (plateau.movementSetIsPossible(activeVehicle, instructions)) {
+            if (plateau.movementSetIsPossible((Movable)activeVehicle, instructions)) {
                 mover.move(instructions);
             } else {
                 System.out.println("I'm sorry, this instruction set causes a collision and can not be executed.");
