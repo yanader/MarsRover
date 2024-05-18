@@ -11,11 +11,9 @@ public enum Resource {
     ROCK(70, "Rock");
 
     private final int weight;
-    private final String name;
 
     Resource(int weight, String name) {
         this.weight = weight;
-        this.name = name;
     }
 
     public int getWeight() {

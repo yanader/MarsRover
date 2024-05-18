@@ -1,6 +1,5 @@
 package org.example.logic;
 
-import org.example.dataclasses.Instruction;
 import org.example.dataclasses.Position;
 import org.example.dataclasses.Resource;
 
