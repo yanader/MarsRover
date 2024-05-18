@@ -39,22 +39,22 @@ class RoverTest {
 
         Rover rover = new Rover(new Position(1, 2, Direction.N));
 
-        rover.executeMovementInstructions(moveOne);
+        rover.move(moveOne);
         assertEquals(1, rover.reportPosition().x());
         assertEquals(3, rover.reportPosition().y());
         assertEquals(Direction.N, rover.reportPosition().direction());
 
-        rover.executeMovementInstructions(moveTwo);
+        rover.move(moveTwo);
         assertEquals(1, rover.reportPosition().x());
         assertEquals(6, rover.reportPosition().y());
         assertEquals(Direction.N, rover.reportPosition().direction());
 
-        rover.executeMovementInstructions(moveThree);
+        rover.move(moveThree);
         assertEquals(3, rover.reportPosition().x());
         assertEquals(6, rover.reportPosition().y());
         assertEquals(Direction.N, rover.reportPosition().direction());
 
-        rover.executeMovementInstructions(moveFour);
+        rover.move(moveFour);
         assertEquals(3, rover.reportPosition().x());
         assertEquals(4, rover.reportPosition().y());
         assertEquals(Direction.S, rover.reportPosition().direction());

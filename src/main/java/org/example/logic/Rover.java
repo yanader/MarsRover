@@ -8,7 +8,7 @@ public class Rover extends Vehicle implements Movable{
         super(position);
     }
 
-    public void executeMovementInstructions(Instruction[] instructions) {
+    public void move(Instruction[] instructions) {
         for (Instruction instruction : instructions) {
             if (instruction == Instruction.M) {
                 super.setPosition(moveForwards(this.reportPosition()));

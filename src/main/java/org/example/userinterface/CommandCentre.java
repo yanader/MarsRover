@@ -169,7 +169,7 @@ public class CommandCentre {
     private void executeInstruction(Vehicle vehicle, Instruction[] instructions) {
         if (vehicle instanceof Movable mover) {
             if (plateau.movementSetIsPossible(activeVehicle, instructions)) {
-                mover.executeMovementInstructions(instructions);
+                mover.move(instructions);
             } else {
                 System.out.println("I'm sorry, this instruction set causes a collision and can not be executed.");
                 offerTruncatedInstructionsAsMove(activeVehicle, instructions);

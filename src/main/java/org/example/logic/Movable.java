@@ -4,6 +4,6 @@ import org.example.dataclasses.Instruction;
 
 public interface Movable {
 
-    void executeMovementInstructions(Instruction[] instructions);
+    void move(Instruction[] instructions);
 
 }
