@@ -10,13 +10,16 @@ Done
     offer an option for the user to pick a vehicle to control
 -) CommandCentre.chooseOption()
     This will allow the user to choose between moving the active vehicle, swapping vehicles or landing another vehicle
+-Refactored tests for dataclasses and logic.
+
 
 NEXT
 
--Refactored tests for dataclasses and logic.
 -Need to refactor tests for parsers
     - and refactor the parsers themselves
 
+
+-> Execution of truncated instructions causes two outputs to console.
 -) CommandCentre to allow ui options to dig. (Might be straightforward - need to double check access modifiers)
 This works but the UI options surrounding it, text outputs and Help need updating
 CLEAN UP USER INTERFACE -- too much text
