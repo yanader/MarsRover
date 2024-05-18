@@ -9,6 +9,6 @@ public record Position(int x, int y, Direction direction) {
 
     @Override
     public String toString() {
-        return "Position: (" + x + "," + y + ") Facing: " + direction;
+        return "Position: x -> " + x + " | y -> " + y + " | direction -> " + direction;
     }
 }
