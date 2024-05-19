@@ -23,8 +23,6 @@ public class Rover extends Vehicle implements Movable{
     }
 
     public boolean testMovement(Plateau plateau, Instruction[] instructions) {
-
-
         return possibleSteps(plateau, instructions) == instructions.length - 1;
     }
 
