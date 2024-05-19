@@ -13,5 +13,7 @@ public interface Movable {
 
     boolean moveForwardIsPossible(DirectionalPosition position, Plateau plateau);
 
+    int possibleSteps(Plateau plateau, Instruction[] instructions);
+
     Direction getDirection();
 }

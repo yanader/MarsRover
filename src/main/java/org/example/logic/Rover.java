@@ -3,6 +3,7 @@ package org.example.logic;
 import org.example.dataclasses.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Rover extends Vehicle implements Movable{
@@ -22,36 +23,31 @@ public class Rover extends Vehicle implements Movable{
     }
 
     public boolean testMovement(Plateau plateau, Instruction[] instructions) {
-        Rover proxyRover = new Rover(new DirectionalPosition(this.getX(), this.getY(), this.getDirection()));
 
-        for (Instruction instruction : instructions) {
-            if (instruction == Instruction.L || instruction == Instruction.R) {
-                rotate((DirectionalPosition) proxyRover.getPosition(), instruction);
-            } else if (instruction == Instruction.M && !moveForwardIsPossible((DirectionalPosition)proxyRover.getPosition(), plateau)) {
-                return false;
-            } else {
-                stepForwards((DirectionalPosition) proxyRover.getPosition());
-            }
-        }
-        return true;
+
+        return possibleSteps(plateau, instructions) == instructions.length - 1;
     }
 
     public Instruction[] truncateMovementSet(Plateau plateau, Instruction[] instructions) {
-        List<Instruction> truncatedInstructionsList = new ArrayList<>();
+        int validSteps = possibleSteps(plateau, instructions);
+        return Arrays.copyOfRange(instructions, 0, validSteps + 1);
+    }
+
+    public int possibleSteps(Plateau plateau, Instruction[] instructions) {
+        int executedInstructions = -1;
         Rover proxyRover = new Rover(new DirectionalPosition(this.getX(), this.getY(), this.getDirection()));
         for (Instruction instruction: instructions) {
             if (instruction == Instruction.L || instruction == Instruction.R) {
-                truncatedInstructionsList.add(instruction);
                 rotate((DirectionalPosition) proxyRover.getPosition(), instruction);
+                executedInstructions++;
             } else if (instruction == Instruction.M && moveForwardIsPossible((DirectionalPosition)proxyRover.getPosition(), plateau)) {
-                truncatedInstructionsList.add(instruction);
                 stepForwards((DirectionalPosition) proxyRover.getPosition());
+                executedInstructions++;
             } else if (instruction == Instruction.M && !moveForwardIsPossible((DirectionalPosition)proxyRover.getPosition(), plateau)) {
-                break;
+                return executedInstructions;
             }
         }
-        Instruction[] truncatedInstructionsArray = new Instruction[truncatedInstructionsList.size()];
-        return truncatedInstructionsList.toArray(truncatedInstructionsArray);
+        return executedInstructions;
     }
 
     public boolean moveForwardIsPossible(DirectionalPosition position, Plateau plateau) {
