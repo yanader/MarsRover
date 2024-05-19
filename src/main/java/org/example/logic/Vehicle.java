@@ -9,18 +9,23 @@ public abstract class Vehicle {
         this.position = position;
     }
 
-    public Position reportPosition() {
-        return this.position;
+    public int getX() {
+        return position.getX();
+    }
+
+    public int getY() {
+        return position.getY();
     }
 
     public void setPosition(Position position) {
         this.position = position;
     }
 
-    public String shortPosition() {
-        return "Position: x -> " + this.reportPosition().x() + " | y -> "
-                + this.reportPosition().y() + " | direction -> "
-                + this.reportPosition().direction().toString();
+    public Position getPosition() {
+        return position;
     }
 
+    public String outputPosition() {
+        return this.position.toString();
+    }
 }

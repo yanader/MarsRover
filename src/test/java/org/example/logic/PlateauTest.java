@@ -25,9 +25,9 @@ class PlateauTest {
     @Test
     void plateauIsEmptyRespondsCorrectly() throws PositionOccupiedException {
         Plateau plateau = new Plateau(new PlateauSize(10, 10));
-        Vehicle roverOne = new Rover(new Position(1, 1 , Direction.N));
-        Vehicle roverTwo = new Rover(new Position(2, 2 , Direction.N));
-        Vehicle roverThree = new Rover(new Position(3, 3 , Direction.N));
+        Vehicle roverOne = new Rover(new DirectionalPosition(1, 1 , Direction.N));
+        Vehicle roverTwo = new Rover(new DirectionalPosition(2, 2 , Direction.N));
+        Vehicle roverThree = new Rover(new DirectionalPosition(3, 3 , Direction.N));
 
         plateau.landVehicle(roverOne);
         plateau.landVehicle(roverTwo);
@@ -45,62 +45,10 @@ class PlateauTest {
     }
 
     @Test
-    void plateauMoveForwardIsPossibleRespondsCorrectly() throws PositionOccupiedException {
-        Plateau plateau = new Plateau(new PlateauSize(10, 10));
-        Vehicle roverOne = new Rover(new Position(0, 0 , Direction.W));
-        Vehicle roverTwo = new Rover(new Position(9, 9 , Direction.N));
-        Vehicle roverThree = new Rover(new Position(9, 3 , Direction.E));
-        plateau.landVehicle(roverOne);
-        plateau.landVehicle(roverTwo);
-        plateau.landVehicle(roverThree);
-
-        Vehicle roverFour = new Rover(new Position(2, 2 , Direction.N));
-        Vehicle roverFive = new Rover(new Position(8, 8 , Direction.S));
-        Vehicle roverSix = new Rover(new Position(4, 5 , Direction.E));
-        plateau.landVehicle(roverFour);
-        plateau.landVehicle(roverFive);
-        plateau.landVehicle(roverSix);
-
-        assertAll(() -> {
-            assertFalse(plateau.moveForwardIsPossible(roverOne));
-            assertFalse(plateau.moveForwardIsPossible(roverTwo));
-            assertFalse(plateau.moveForwardIsPossible(roverThree));
-
-            assertTrue(plateau.moveForwardIsPossible(roverFour));
-            assertTrue(plateau.moveForwardIsPossible(roverFive));
-            assertTrue(plateau.moveForwardIsPossible(roverSix));
-        });
-    }
-
-    @Test
-    void movementSetIsPossibleReturnsCorrectBoolean() throws PositionOccupiedException {
-        Plateau plateau = new Plateau(new PlateauSize(10, 10));
-        Vehicle rover = new Rover(new Position(0, 0, Direction.N));
-        plateau.landVehicle(rover);
-        Instruction[] trueSetOne = {Instruction.M, Instruction.R, Instruction.M, Instruction.L, Instruction.M};
-        Instruction[] trueSetTwo = {Instruction.M, Instruction.M, Instruction.M};
-        Instruction[] trueSetThree = {Instruction.R, Instruction.R, Instruction.R, Instruction.R, Instruction.M};
-        Instruction[] falseSetOne = {Instruction.L, Instruction.M};
-        Instruction[] falseSetTwo = {Instruction.M, Instruction.M, Instruction.M, Instruction.M, Instruction.M, Instruction.M, Instruction.M, Instruction.M, Instruction.M, Instruction.M,Instruction.M};
-        Instruction[] falseSetThree = {Instruction.R, Instruction.R, Instruction.M};
-
-
-        assertAll(() -> {
-           assertTrue(plateau.movementSetIsPossible(rover, trueSetOne));
-           assertTrue(plateau.movementSetIsPossible(rover, trueSetTwo));
-           assertTrue(plateau.movementSetIsPossible(rover, trueSetThree));
-           assertFalse(plateau.movementSetIsPossible(rover, falseSetOne));
-           assertFalse(plateau.movementSetIsPossible(rover, falseSetTwo));
-           assertFalse(plateau.movementSetIsPossible(rover, falseSetThree));
-
-        });
-    }
-
-    @Test
     void plateauAcceptsVehiclesOfMultipleSubTypes() {
         Plateau plateau = new Plateau(new PlateauSize(10, 10));
-        Vehicle rover = new Rover(new Position(0, 0, Direction.N));
-        Vehicle miner = new Miner(new Position(1, 1, Direction.N));
+        Vehicle rover = new Rover(new DirectionalPosition(0, 0, Direction.N));
+        Vehicle miner = new Miner(new DirectionalPosition(1, 1, Direction.N));
 
         assertAll(() -> {
             assertDoesNotThrow(() -> plateau.landVehicle(rover));
@@ -110,27 +58,24 @@ class PlateauTest {
 
     @Test
     void plateauThrowsExceptionWhenLandingOnOccupiedPosition() throws PositionOccupiedException {
-        Vehicle vehicleOne = new Rover(new Position(0, 0, Direction.N));
-        Vehicle vehicleTwo = new Rover(new Position(0, 0, Direction.N));
+        Vehicle vehicleOne = new Rover(new DirectionalPosition(0, 0, Direction.N));
+        Vehicle vehicleTwo = new Rover(new DirectionalPosition(0, 0, Direction.N));
         Plateau plateau = new Plateau(new PlateauSize(10, 10));
         plateau.landVehicle(vehicleOne);
 
         assertThrows(PositionOccupiedException.class, () -> plateau.landVehicle(vehicleTwo));
     }
 
-
-
     @Test
     void plateauCorrectlyReturnsVehicles() throws PositionOccupiedException {
-        Vehicle vehicleOne = new Rover(new Position(0, 0, Direction.N));
-        Vehicle vehicleTwo = new Rover(new Position(0, 1, Direction.N));
-        Vehicle vehicleThree = new Miner(new Position(0, 2, Direction.N));
+        Vehicle vehicleOne = new Rover(new DirectionalPosition(0, 0, Direction.N));
+        Vehicle vehicleTwo = new Rover(new DirectionalPosition(0, 1, Direction.N));
+        Vehicle vehicleThree = new Miner(new Position(0, 2));
         Plateau plateau = new Plateau(new PlateauSize(10, 10));
         plateau.landVehicle(vehicleOne);
         plateau.landVehicle(vehicleTwo);
         plateau.landVehicle(vehicleThree);
 
         assertEquals(3, plateau.getVehicles().size());
-
     }
 }

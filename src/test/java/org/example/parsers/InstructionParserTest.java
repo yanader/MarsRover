@@ -3,6 +3,7 @@ package org.example.parsers;
 import org.example.dataclasses.Direction;
 import org.example.dataclasses.Instruction;
 import org.example.dataclasses.Position;
+import org.example.logic.DirectionalPosition;
 import org.example.logic.Miner;
 import org.example.logic.Rover;
 import org.example.logic.Vehicle;
@@ -18,12 +19,12 @@ class InstructionParserTest {
 
     @BeforeEach
     void setup() {
-        miner = new Miner(new Position(1, 1, Direction.S));
-        rover = new Rover(new Position(0, 0, Direction.N));
+        miner = new Miner(new Position(1, 1));
+        rover = new Rover(new DirectionalPosition(0, 0, Direction.N));
     }
 
     @Test
-    void createInstructionListReturnsMovementInstructionArray() {
+    void createMovementInstructionListReturnsInstructionArray() {
         assertEquals(Instruction[].class, InstructionParser.createMovementInstructionList("LRM", rover).getClass());
     }
 
@@ -35,6 +36,8 @@ class InstructionParserTest {
            assertThrows(IllegalArgumentException.class, () -> InstructionParser.createMovementInstructionList("Q", rover));
            assertThrows(IllegalArgumentException.class, () -> InstructionParser.createMovementInstructionList("!", rover));
            assertThrows(IllegalArgumentException.class, () -> InstructionParser.createMovementInstructionList("L R M", rover));
+           assertThrows(IllegalArgumentException.class, () -> InstructionParser.createMovementInstructionList("L", miner));
+           assertThrows(IllegalArgumentException.class, () -> InstructionParser.createMovementInstructionList("LRM", miner));
         });
     }
 
@@ -70,6 +73,13 @@ class InstructionParserTest {
            assertArrayEquals(testInstructionSetTwo, InstructionParser.createMovementInstructionList("MMM", rover));
            assertArrayEquals(testInstructionSetThree, InstructionParser.createMovementInstructionList("M", rover));
         });
+    }
+
+    /// tests for createDigInstructions
+
+    @Test
+    void createDigInstructionListReturnsInstructionArray() {
+        assertEquals(Instruction[].class, InstructionParser.createDigInstructionFromInput("D", miner).getClass());
     }
 
     @Test

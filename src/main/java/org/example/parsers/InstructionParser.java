@@ -24,7 +24,7 @@ public class InstructionParser {
 
     private static boolean createMovementInstructionListInputIsValid(String input) {
         Matcher matcher = Pattern.compile("^[RLM]+$").matcher(input);
-        return matcher.find();
+        return matcher.find() && !input.isEmpty();
     }
 
     public static Instruction[] createDigInstructionFromInput(String input, Vehicle vehicle) throws IllegalArgumentException {
