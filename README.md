@@ -45,7 +45,7 @@ This will provide you with a custom-built Command Centre which will allow you to
    1. Land Vehicle
       - The user can land a new vehicle on the surface.
       - You will be prompted for the vehicle type and then asked for appropriate Position details
-      - The create vehicle will be your active vehicle
+      - The created vehicle will be your active vehicle
    2. Activate Vehicle
       - The user will be provided with a list of all Vehicles on the surface and be able to choose which to activate
    3. Control Vehicle
