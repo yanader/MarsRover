@@ -21,6 +21,8 @@ The Rover maintains its position which consists of X and Y coordinates and the c
 A Miner can be dropped on the surface at a location dictated by the user. The Miner is unable to move but can dig for valuable resources below the surface.
 The Miner maintains its position which consists of X and Y coordinates.
 
+## The simulation
+
 ### Instructions
 
 To start the programme, navigate via terminal to the location of MarsRover.jar and execute with
