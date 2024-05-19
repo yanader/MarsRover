@@ -1,6 +1,7 @@
 package org.example.logic;
 
 import org.example.dataclasses.Direction;
+import org.example.dataclasses.Instruction;
 import org.example.dataclasses.Position;
 import org.example.dataclasses.Resource;
 import org.junit.jupiter.api.Test;
@@ -31,7 +32,7 @@ class MinerTest {
     void minerMines() {
         Miner miner = new Miner(new Position(1, 2));
 
-        assertEquals(Resource.GOLD.getClass(), miner.dig().getClass());
+        assertEquals(Resource.GOLD.getClass(), miner.dig(new Instruction[]{Instruction.D}).getClass());
     }
 
 

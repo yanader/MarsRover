@@ -62,8 +62,7 @@ public class CommandCentre {
     private Instruction[] takeInstruction() {
         while(true) {
             System.out.println("Active vehicle type - " + activeVehicle.getClass().getSimpleName());
-            System.out.println("Provide the vehicle with an instruction");
-            System.out.println("'H' for help");
+            System.out.println("Provide the vehicle with an instruction ('H' for help)" );
             String input = scanner.nextLine();
             if (input.equalsIgnoreCase("H")) {
                 help();
@@ -92,9 +91,7 @@ public class CommandCentre {
             try {
                 PlateauSize ps = SetupInputParser.createPlateauSize(scanner.nextLine());
                 plateau = new Plateau(ps);
-                System.out.println("Exploring plateau of size " + ps.plateauXSize() + " * " + ps.plateauYSize());
-                System.out.println("x-Axis: 0 - " + (ps.plateauXSize() - 1));
-                System.out.println("y-Axis: 0 - " + (ps.plateauYSize() - 1));
+                System.out.println("Plateau size " + ps.plateauXSize() + "*" + ps.plateauYSize() +" | x:(0-" + (ps.plateauXSize() - 1) + ") | y:(0-" + (ps.plateauYSize() - 1) + ")");
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println("Invalid input for plateau size");
@@ -123,7 +120,7 @@ public class CommandCentre {
     private int specifyVehicleType() {
         while (true){
             try {
-                System.out.println("Please choose a vehicle type");
+                System.out.println("Please choose a vehicle type:");
                 System.out.println("1. Rover");
                 System.out.println("2. Miner");
                 int choice =  Integer.parseInt(scanner.nextLine());
@@ -148,10 +145,7 @@ public class CommandCentre {
     private String getDirectionalPositionFromUser() {
         while (true) {
             try {
-                System.out.println("Input vehicle drop site. (Format: X Y D)");
-                System.out.println("X -> X Coordinate");
-                System.out.println("Y -> Y Coordinate");
-                System.out.println("D -> Cardinal compass directions -> N/E/S/W");
+                System.out.println("Input drop site. (Format: X Y D) -> [X] Coordinate -> [Y] Coordinate -> [D]irection (N/E/S/W)");
                 String input = scanner.nextLine();
                 if (!input.isEmpty()) {
                     return input;
@@ -165,9 +159,7 @@ public class CommandCentre {
     private String getPositionFromUser() {
         while (true) {
             try {
-                System.out.println("Input vehicle drop site. (Format: X Y D)");
-                System.out.println("X -> X Coordinate");
-                System.out.println("Y -> Y Coordinate");
+                System.out.println("Input vehicle drop site. (Format: X Y) -> [X] Coordinate -> [Y] Coordinate");
                 String input = scanner.nextLine();
                 if (!input.isEmpty()) {
                     return input;
@@ -199,17 +191,25 @@ public class CommandCentre {
 
     private void executeInstruction(Vehicle vehicle, Instruction[] instructions) {
         if (vehicle instanceof Movable mover) {
-            if (plateau.movementSetIsPossible((Movable)activeVehicle, instructions)) {
-                mover.move(instructions);
-            } else {
-                System.out.println("I'm sorry, this instruction set causes a collision and can not be executed.");
-                offerTruncatedInstructionsAsMove(activeVehicle, instructions);
-            }
-            System.out.println("Vehicle type: " + activeVehicle.getClass().getSimpleName() + " now at " + activeVehicle.getPosition());
+            movableMoves(mover, instructions);
         } else if (vehicle instanceof Diggable digger) {
-            Resource resource = digger.dig();
-            System.out.println("Vehicle type: " + activeVehicle.getClass().getSimpleName() + " found " + resource.name() + " at " + activeVehicle.getPosition());
+            diggableDigs(digger, instructions);
         }
+    }
+
+    private void movableMoves(Movable movable, Instruction[] instructions) {
+        if (plateau.movementSetIsPossible((Movable)activeVehicle, instructions)) {
+            movable.move(instructions);
+            System.out.println("Vehicle type: " + activeVehicle.getClass().getSimpleName() + " now at " + activeVehicle.getPosition());
+        } else {
+            System.out.println("I'm sorry, this instruction set causes a collision and can not be executed.");
+            offerTruncatedInstructionsAsMove(activeVehicle, instructions);
+        }
+    }
+
+    private void diggableDigs(Diggable diggable, Instruction[] instructions) {
+        Resource resource = diggable.dig(instructions);
+        System.out.println("Vehicle type: " + activeVehicle.getClass().getSimpleName() + " found " + resource.name() + " at " + activeVehicle.getPosition());
     }
 
     private void help() {
@@ -217,6 +217,7 @@ public class CommandCentre {
         System.out.println("L -> rotate 90 degrees left/anti-clockwise");
         System.out.println("R -> rotate 90 degrees right/clockwise");
         System.out.println("M -> move forward one space");
+        System.out.println("D -> dig");
         System.out.println("Example:");
         System.out.println("\tInput - MMRMMLMM");
         System.out.println("\t\tMoves forward two spaces");
@@ -228,26 +229,28 @@ public class CommandCentre {
     }
 
 
-    private Instruction[] truncateInstruction(Vehicle vehicle, Instruction[] instructions) {
-        return plateau.truncateMovementInstructions(vehicle, instructions);
+    private Instruction[] truncateInstruction(Movable movable, Instruction[] instructions) {
+        return movable.truncateMovementSet(plateau, instructions);
     }
 
     private void offerTruncatedInstructionsAsMove(Vehicle vehicle, Instruction[] instructions) {
-        Instruction[] truncatedInstructions = truncateInstruction(vehicle, instructions);
-        if (truncatedInstructions.length > 0) {
-            System.out.println("The truncated instruction set that can be executed successfully is: ");
-            while (true) {
-                System.out.println(Arrays.toString(truncatedInstructions));
-                System.out.println("Would you like to execute this command? (Y to proceed, N to reject)");
-                if (scanner.nextLine().equalsIgnoreCase("Y")) {
-                    executeInstruction(vehicle, truncatedInstructions);
-                    break;
-                } else if (scanner.nextLine().equalsIgnoreCase("N")) {
-                    System.out.println("Instruction Cancelled");
-                    break;
+        if (vehicle instanceof Movable) {
+            Instruction[] truncatedInstructions = truncateInstruction((Movable) vehicle, instructions);
+            if (truncatedInstructions.length > 0) {
+                System.out.println("The truncated instruction set that can be executed successfully is: ");
+                while (true) {
+                    System.out.println(Arrays.toString(truncatedInstructions));
+                    System.out.println("Would you like to execute this command? (Y to proceed, N to reject)");
+                    if (scanner.nextLine().equalsIgnoreCase("Y")) {
+                        executeInstruction(vehicle, truncatedInstructions);
+                        break;
+                    } else if (scanner.nextLine().equalsIgnoreCase("N")) {
+                        System.out.println("Instruction Cancelled");
+                        break;
+                    }
                 }
-            }
 
+            }
         }
     }
 
