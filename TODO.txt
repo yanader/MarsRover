@@ -10,5 +10,6 @@ TODO
 -) clean up text displays to user
 -) clean up "status" of a vehicle that print position/directional position but take it from the position (toString)
 -) Interface Scannable with a class that can scan for resources
+-) create better separation between programme flow and ui
 -) refactor logic around checking movement instructions/offering truncated instructions (too much repetition)
 -) refactor everything
