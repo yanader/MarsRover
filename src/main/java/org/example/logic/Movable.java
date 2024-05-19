@@ -2,7 +2,6 @@ package org.example.logic;
 
 import org.example.dataclasses.Direction;
 import org.example.dataclasses.Instruction;
-import org.example.dataclasses.Position;
 
 public interface Movable {
 

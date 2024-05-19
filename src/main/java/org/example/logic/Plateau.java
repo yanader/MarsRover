@@ -1,9 +1,7 @@
 package org.example.logic;
 
-import org.example.dataclasses.Direction;
 import org.example.dataclasses.Instruction;
 import org.example.dataclasses.PlateauSize;
-import org.example.dataclasses.Position;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,9 +48,5 @@ public class Plateau {
 
     public boolean movementSetIsPossible(Movable rover, Instruction[] instructions) {
         return rover.testMovement(this, instructions);
-    }
-
-    public Instruction[] truncateMovementInstructions(Vehicle vehicle, Instruction[] instructions) {
-        return ((Rover)vehicle).truncateMovementSet(this, instructions);
     }
 }

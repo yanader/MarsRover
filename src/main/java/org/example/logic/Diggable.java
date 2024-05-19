@@ -5,5 +5,6 @@ import org.example.dataclasses.Resource;
 
 public interface Diggable {
 
-    public Resource dig(Instruction[] instructions);
+    Resource dig(Instruction[] instructions);
+
 }

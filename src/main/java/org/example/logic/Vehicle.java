@@ -9,14 +9,6 @@ public abstract class Vehicle {
         this.position = position;
     }
 
-    public void setXCoordinate(int x) {
-        position.setX(x);
-    }
-
-    public void setYCoordinate(int y) {
-        position.setY(y);
-    }
-
     public int getX() {
         return position.getX();
     }
@@ -36,5 +28,4 @@ public abstract class Vehicle {
     public String outputPosition() {
         return this.position.toString();
     }
-
 }
