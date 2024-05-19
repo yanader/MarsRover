@@ -21,7 +21,7 @@ public class SetupInputParser {
         return new PlateauSize(Integer.parseInt(sizeParts[0]), Integer.parseInt(sizeParts[1]));
     }
 
-    public static Position createDirectionalPosition(String input) {
+    public static DirectionalPosition createDirectionalPosition(String input) {
         if (!createDirectionalPositionInputIsValid(input)) {
             throw new IllegalArgumentException("Input invalid. \"X Y D\" for X/Y >= 0, D = [N/E/S/W]");
         }
