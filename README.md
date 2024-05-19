@@ -2,20 +2,26 @@
 
 ### Description
 
-Welcome to Mars. This programme will allow you to deploy a Rover and explore the surface of Mars.
+Welcome to Mars. This programme will allow you to deploy Vehicles and explore the surface of Mars.
 
 ### The Plateau
 
 The Plateau is represented by a two-dimensional grid of size x * y. These sizes are provided by the user and create a grid with coordinates (0, 0) through to (x -1, y - 1).
 For the purpose of the simulation, (0, 0) is considered the South-West corner and (x-1, y-1) is considered the North-East corner.
 
+## Vehicles
+
 ### The Rover
 
 The Rover is a vehicle that will have its initial position dictated by the user and then be given move instructions that will allow it to navigate the plateau.
-The rover maintains its position which consists of an X coordinate, a Y coordinate and the cardinal compass direction it is currently facing (N/E/S/W).
+The Rover maintains its position which consists of X and Y coordinates and the cardinal compass direction it is currently facing (N/E/S/W).
+
+### The Miner
+
+A Miner can be dropped on the surface at a location dictated by the user. The Miner is unable to move but can dig for valuable resources below the surface.
+The Miner maintains its position which consists of X and Y coordinates.
 
 ### Instructions
-
 
 To start the programme, navigate via terminal to the location of MarsRover.jar and execute with
 
@@ -29,29 +35,39 @@ This will provide you with a custom-built Command Centre which will allow you to
 
 1. Setup
    1. Provide the size of the Plateau to be explored in the format "X Y" where X and Y are positive integers.
-   2. Provide the starting position of the Rover in the format "X Y D" where:
+   2. Provide the starting position of your first Rover in the format "X Y D" where:
       - X -> initial x coordinate from 0 to the length of the X axis minus 1
       - Y -> initial y coordinate from 0 to the length of the Y axis minus 1
       - D -> initial direction the rover is facing where D is one of the four cardinal directions (N/E/S/W)
-2. Further Instructions
-   1. Provide the Rover with movement instructions with three uppercase characters.
-      - L -> rotate 90&deg; left/anti-clockwise
-      - R -> rotate 90&deg; right/clockwise
-      - M -> move one position forwards
-      - Instructions can be provided in a chain. Example:
-        - Input: MMRMMLMM
-          - Moves forward two spaces
-          - Rotates right
-          - Moves forward two spaces
-          - Rotates Left
-          - Moves forward two spaces
-      - On providing an instructions set  that would cause a collision or lead the Rover off the edge of the Plateau:
-        - If the first step of the instructions caused the collision, the user will be informed the instruction can not be carried out.
-        - If a subset of instructions would be valid, the user will be offered a truncated version of their instructions and asked for an input.
-          - Y -> Execute the truncated instructions
-          - N -> Reject the truncation and resume the programme.
-   2. Input 'H' to access help
-   3. Input 'Q' to quit the Mars Rover Application
+2. Further Instructions. The user will be given a choice:
+   1. Land Vehicle
+      - The user can land a new vehicle on the surface.
+      - You will be prompted for the vehicle type and then asked for appropriate Position details
+      - The create vehicle will be your active vehicle
+   2. Activate Vehicle
+      - The user will be provided with a list of all Vehicles on the surface and be able to choose which to activate
+   3. Control Vehicle
+      - Depending on the vehicle type, different commands can be used to control the vehicle.
+        1. Rover:
+        - L -> rotate 90&deg; left/anti-clockwise
+        - R -> rotate 90&deg; right/clockwise
+        - M -> move one position forwards
+        - Instructions can be provided in a chain. Example:
+          - Input: MMRMMLMM
+            - Moves forward two spaces
+            - Rotates right
+            - Moves forward two spaces
+            - Rotates Left
+            - Moves forward two spaces
+        - On providing an instructions set  that would cause a collision or lead the Rover off the edge of the Plateau:
+          - If the first step of the instructions caused the collision, the user will be informed the instruction can not be carried out.
+          - If a subset of instructions would be valid, the user will be offered a truncated version of their instructions and asked for an input.
+            - Y -> Execute the truncated instructions
+            - N -> Reject the truncation and resume the programme.
+        2. Miner:
+           - D -> Dig
+   - Input 'H' to access help
+   - Input '0' to quit the Mars Rover Application
 
 
 ### Documentation
@@ -69,5 +85,5 @@ The codebase is split into several packages as follows:
    - ~On receiving an instruction set that would ordinarily be rejected by the Command Center, the option to execute a truncated instruction set will be offered which will execute the instruction up until but not including the individual instruction that is invalid.~
 2. Additional Vehicle Types with appropriate interfaces. These additions will allow for surface samples to be tested and, if desired, mined for resources
    - Tester implements Testable, Movable
-   - Miner implements Minable
+   - ~Miner implements Minable~
 3. Inclusion of multiple Plateaus (landing sites) per mission with the ability to move Vehicles between them.
