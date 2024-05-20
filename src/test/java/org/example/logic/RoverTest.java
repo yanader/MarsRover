@@ -6,6 +6,8 @@ import org.example.dataclasses.PlateauSize;
 import org.example.dataclasses.Position;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class RoverTest {
@@ -15,7 +17,7 @@ class RoverTest {
         Vehicle rover = new Rover(new DirectionalPosition(0, 0 , Direction.N));
         assertEquals(Vehicle.class, rover.getClass().getSuperclass());
         assertEquals(Rover.class, rover.getClass());
-        assertEquals(Movable.class, rover.getClass().getInterfaces()[0]);
+        assertTrue(Arrays.asList(rover.getClass().getInterfaces()).contains(Movable.class));
     }
 
     @Test
