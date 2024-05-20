@@ -1,13 +1,10 @@
-Current
-
-
 TODO
 
-biggest priority: create better separation between programme flow and ui
-
-
--) remove vehicle from surface
--) clean up text displays to user
--) clean up "status" of a vehicle that print position/directional position but take it from the position (toString)
--) Interface Scannable with a class that can scan for resources
--) refactor everything
+1. Refactoring
+    biggest priority: create better separation between programme flow and ui
+    -) review everything for refactoring opportunities
+2. Functionality
+    -) clean up text displays to user
+    -) remove vehicle from surface
+    -) clean up "status" of a vehicle that print position/directional position but take it from the position (toString)
+    -) Interface Scannable with a class that can scan for resources
