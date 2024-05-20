@@ -6,6 +6,8 @@ import org.example.dataclasses.Position;
 import org.example.dataclasses.Resource;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MinerTest {
@@ -15,7 +17,7 @@ class MinerTest {
         Vehicle miner = new Miner(new Position(0, 0));
         assertEquals(Vehicle.class, miner.getClass().getSuperclass());
         assertEquals(Miner.class, miner.getClass());
-        assertEquals(Diggable.class, miner.getClass().getInterfaces()[0]);
+        assertTrue(Arrays.asList(miner.getClass().getInterfaces()).contains(Diggable.class));
     }
 
     @Test
