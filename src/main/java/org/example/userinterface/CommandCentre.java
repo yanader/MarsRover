@@ -45,6 +45,7 @@ public class CommandCentre {
     private void activateVehicle() {
         List<Vehicle> vehicleList = plateau.getVehicles();
         activeVehicle = userInterface.chooseActiveVehicle(vehicleList);
+        userInterface.reportActiveVehicle(activeVehicle);
     }
 
     private Instruction[] takeInstruction() {
@@ -68,7 +69,7 @@ public class CommandCentre {
                 if (vehicle == null) continue;
                 plateau.landVehicle(vehicle);
                 this.activeVehicle = vehicle;
-                System.out.println("Vehicle type: " + vehicle.getClass().getSimpleName() + " launched at " + vehicle.getPosition());
+                userInterface.reportVehicleLaunch(activeVehicle);
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println("Invalid input for initial position");

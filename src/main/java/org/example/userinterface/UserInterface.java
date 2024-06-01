@@ -27,7 +27,7 @@ public class UserInterface {
     public int takeUserOption() {
         while(true) {
             System.out.println("Please select an option");
-            System.out.println("1. Land Vehicle");
+            System.out.println("1. Launch Vehicle");
             System.out.println("2. Activate Vehicle");
             System.out.println("3. Control Vehicle");
             System.out.println("0. Quit Programme");
@@ -146,6 +146,14 @@ public class UserInterface {
                 return false;
             }
         }
+    }
+
+    public void reportVehicleLaunch(Vehicle vehicle) {
+        System.out.println("Vehicle type: " + vehicle.getClass().getSimpleName() + " launched at " + vehicle.getPosition());
+    }
+
+    public void reportActiveVehicle(Vehicle vehicle) {
+        System.out.println("Active Vehicle type: " + vehicle.getClass().getSimpleName() + " at " + vehicle.getPosition());
     }
 
     public void welcomeMessage() {
