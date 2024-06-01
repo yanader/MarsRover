@@ -7,28 +7,27 @@ import org.example.parsers.*;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Scanner;
 
 public class CommandCentre {
-    final private Scanner scanner;
     private Plateau plateau;
     private Vehicle activeVehicle;
+    private final UserInterface userInterface;
 
     public CommandCentre() {
-        this.scanner = new Scanner(System.in);
+        this.userInterface = new UserInterface();
         startMission();
     }
 
     public void startMission() {
-        System.out.println("Welcome to Mars");
+        userInterface.welcomeMessage();
         missionSetup();
         while (true) {
 
-            int choice = takeUserOption();
+            int choice = userInterface.takeUserOption();
 
             switch(choice) {
                 case 0:
-                    System.out.println("Thank you for visiting Mars. Please come back soon");
+                    userInterface.endMessage();
                     return;
                 case 1:
                     dropVehicle();
@@ -45,39 +44,11 @@ public class CommandCentre {
 
     private void activateVehicle() {
         List<Vehicle> vehicleList = plateau.getVehicles();
-        while (true) {
-            System.out.println("Please select a vehicle by number");
-            for (int i = 0; i < vehicleList.size(); i++) {
-                System.out.println("\t" + (i + 1) + ". Type: " + vehicleList.get(i).getClass().getSimpleName() + " | " + vehicleList.get(i).outputPosition());
-            }
-            try {
-                int choice = Integer.parseInt(scanner.nextLine());
-                if (choice < 1 || choice > vehicleList.size()) continue;
-                activeVehicle = vehicleList.get(choice - 1);
-                return;
-            } catch (Exception ignore) {}
-        }
+        activeVehicle = userInterface.chooseActiveVehicle(vehicleList);
     }
 
     private Instruction[] takeInstruction() {
-        while(true) {
-            System.out.println("Active vehicle type - " + activeVehicle.getClass().getSimpleName());
-            System.out.println("Provide the vehicle with an instruction ('H' for help)" );
-            String input = scanner.nextLine();
-            if (input.equalsIgnoreCase("H")) {
-                help();
-                continue;
-            }
-            try {
-                if (activeVehicle.getClass() == Rover.class) {
-                    return InstructionParser.createMovementInstructionList(input, activeVehicle);
-                } else if (activeVehicle.getClass() == Miner.class) {
-                    return InstructionParser.createDigInstructionFromInput(input, activeVehicle);
-                }
-            } catch (IllegalArgumentException e) {
-                System.out.println("Invalid instruction input");
-            }
-        }
+        return userInterface.promptForInstructions(activeVehicle);
     }
 
     private void missionSetup() {
@@ -86,23 +57,13 @@ public class CommandCentre {
     }
 
     private void createPlateau() {
-        while (true) {
-            System.out.println("Input plateau size. (Format:NUM NUM)");
-            try {
-                PlateauSize ps = SetupInputParser.createPlateauSize(scanner.nextLine());
-                plateau = new Plateau(ps);
-                System.out.println("Plateau size " + ps.plateauXSize() + "*" + ps.plateauYSize() +" | x:(0-" + (ps.plateauXSize() - 1) + ") | y:(0-" + (ps.plateauYSize() - 1) + ")");
-                break;
-            } catch (IllegalArgumentException e) {
-                System.out.println("Invalid input for plateau size");
-            }
-        }
+        plateau = new Plateau(userInterface.getPlateauSize());
     }
 
     private void dropVehicle() {
         while (true) {
             try {
-                int vehicleType = specifyVehicleType();
+                int vehicleType = userInterface.specifyVehicleType();
                 Vehicle vehicle = vehicleBuilder(vehicleType);
                 if (vehicle == null) continue;
                 plateau.landVehicle(vehicle);
@@ -117,76 +78,16 @@ public class CommandCentre {
         }
     }
 
-    private int specifyVehicleType() {
-        while (true){
-            try {
-                System.out.println("Please choose a vehicle type:");
-                System.out.println("1. Rover");
-                System.out.println("2. Miner");
-                int choice =  Integer.parseInt(scanner.nextLine());
-                if (choice < 1 || choice > 2) continue;
-                return choice;
-            } catch (Exception ignore) {}
-        }
-    }
-
     private Vehicle vehicleBuilder(int i){
         if (i == 1) {
-            DirectionalPosition directPos = SetupInputParser.createDirectionalPosition(getDirectionalPositionFromUser());
+            DirectionalPosition directPos = SetupInputParser.createDirectionalPosition(userInterface.getDirectionalPosition());
             return new Rover(directPos);
         }
         if (i == 2) {
-            Position pos = SetupInputParser.createPosition(getPositionFromUser());
+            Position pos = SetupInputParser.createPosition(userInterface.getPosition());
             return new Miner(pos);
         }
         return null;
-    }
-
-    private String getDirectionalPositionFromUser() {
-        while (true) {
-            try {
-                System.out.println("Input drop site. (Format: X Y D) -> [X] Coordinate -> [Y] Coordinate -> [D]irection (N/E/S/W)");
-                String input = scanner.nextLine();
-                if (!input.isEmpty()) {
-                    return input;
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Input can not be empty");
-            }
-        }
-    }
-
-    private String getPositionFromUser() {
-        while (true) {
-            try {
-                System.out.println("Input vehicle drop site. (Format: X Y) -> [X] Coordinate -> [Y] Coordinate");
-                String input = scanner.nextLine();
-                if (!input.isEmpty()) {
-                    return input;
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Input can not be empty");
-            }
-        }
-    }
-
-    private int takeUserOption() {
-        while(true) {
-            System.out.println("Please select an option");
-            System.out.println("1. Land Vehicle");
-            System.out.println("2. Activate Vehicle");
-            System.out.println("3. Control Vehicle");
-            System.out.println("0. Quit Programme");
-            try {
-                int i = Integer.parseInt(scanner.nextLine());
-                if (i < 0 || i > 3) {
-                    continue;
-                }
-                return i;
-            } catch (Exception e) {
-                System.out.println("Invalid Choice");
-            }
-        }
     }
 
     private void executeInstruction(Vehicle vehicle, Instruction[] instructions) {
@@ -200,32 +101,16 @@ public class CommandCentre {
     private void movableMoves(Movable movable, Instruction[] instructions) {
         if (plateau.movementSetIsPossible((Movable)activeVehicle, instructions)) {
             movable.move(instructions);
-            System.out.println("Vehicle type: " + activeVehicle.getClass().getSimpleName() + " now at " + activeVehicle.getPosition());
+            userInterface.confirmMove(activeVehicle);
         } else {
-            System.out.println("I'm sorry, this instruction set causes a collision and can not be executed.");
+            userInterface.collisionWarning();
             offerTruncatedInstructionsAsMove(activeVehicle, instructions);
         }
     }
 
     private void diggableDigs(Diggable diggable, Instruction[] instructions) {
         Resource resource = diggable.dig(instructions);
-        System.out.println("Vehicle type: " + activeVehicle.getClass().getSimpleName() + " found " + resource.name() + " at " + activeVehicle.getPosition());
-    }
-
-    private void help() {
-        System.out.println("Vehicle instructions are provided through a chain of uppercase characters");
-        System.out.println("L -> rotate 90 degrees left/anti-clockwise");
-        System.out.println("R -> rotate 90 degrees right/clockwise");
-        System.out.println("M -> move forward one space");
-        System.out.println("D -> dig");
-        System.out.println("Example:");
-        System.out.println("\tInput - MMRMMLMM");
-        System.out.println("\t\tMoves forward two spaces");
-        System.out.println("\t\tRotates right");
-        System.out.println("\t\tMoves forward two spaces");
-        System.out.println("\t\tRotates left");
-        System.out.println("\t\tMoves forward two spaces");
-
+        userInterface.confirmDig(activeVehicle, resource);
     }
 
 
@@ -236,20 +121,8 @@ public class CommandCentre {
     private void offerTruncatedInstructionsAsMove(Vehicle vehicle, Instruction[] instructions) {
         if (vehicle instanceof Movable) {
             Instruction[] truncatedInstructions = truncateInstruction((Movable) vehicle, instructions);
-            if (truncatedInstructions.length > 0) {
-                System.out.println("The truncated instruction set that can be executed successfully is: ");
-                while (true) {
-                    System.out.println(Arrays.toString(truncatedInstructions));
-                    System.out.println("Would you like to execute this command? (Y to proceed, N to reject)");
-                    if (scanner.nextLine().equalsIgnoreCase("Y")) {
-                        executeInstruction(vehicle, truncatedInstructions);
-                        break;
-                    } else if (scanner.nextLine().equalsIgnoreCase("N")) {
-                        System.out.println("Instruction Cancelled");
-                        break;
-                    }
-                }
-
+            if (truncatedInstructions.length > 0 && userInterface.userConfirmsTruncatedInstructions(truncatedInstructions)) {
+                executeInstruction(vehicle, truncatedInstructions);
             }
         }
     }
