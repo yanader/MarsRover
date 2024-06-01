@@ -42,7 +42,7 @@ This will provide you with a custom-built Command Centre which will allow you to
       - Y -> initial y coordinate from 0 to the length of the Y axis minus 1
       - D -> initial direction the rover is facing where D is one of the four cardinal directions (N/E/S/W)
 2. Further Instructions. The user will be given a choice:
-   1. Land Vehicle
+   1. Launch Vehicle
       - The user can land a new vehicle on the surface.
       - You will be prompted for the vehicle type and then asked for appropriate Position details
       - The created vehicle will be your active vehicle
@@ -79,7 +79,7 @@ The codebase is split into several packages as follows:
 1. dataclasses - provides Classes and Enums to dictate PlateauSizes, Vehicle positions, cardinal directions and allowed instructions
 2. parsers - provides Classes for validating and parsing user inputs including conversion from String to Instruction[]
 3. logic - provides Classes for Plateau and vehicle types as well as interfaces to dictate vehicle behaviours. Any new vehicle type should extend Vehicle and implement appropriate interfaces
-4. userinterface - provides the CommandCentre class which initialises the programme, controls setup and continued programme flow until the user exits.
+4. userinterface - provides the CommandCentre class which initialises the programme, controls setup and continued programme flow until the user exits and the UserInterface that handles user inputs
 
 ### Future Inclusions
 
@@ -89,3 +89,4 @@ The codebase is split into several packages as follows:
    - Tester implements Testable, Movable
    - ~Miner implements Minable~
 3. Inclusion of multiple Plateaus (landing sites) per mission with the ability to move Vehicles between them.
+4. Include an in memory H2 database that compiles a mission report that will output to a file on termination of the programme
