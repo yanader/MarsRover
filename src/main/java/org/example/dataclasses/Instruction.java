@@ -4,5 +4,9 @@ public enum Instruction {
     L,
     R,
     M,
-    D
+    D;
+
+    public String getInstructionAsString() {
+        return this.name();
+    }
 }

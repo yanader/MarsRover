@@ -1,5 +1,13 @@
 TODO
 
+Priority
+Create/check tests for all database classes
+Create a report writer that outputs database details to
+    file when the programme is closed.
+
+
+
+
 
 1. Refactoring
     -) review everything for refactoring opportunities

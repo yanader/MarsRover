@@ -4,9 +4,11 @@ import org.example.dataclasses.Position;
 
 public abstract class Vehicle {
     private Position position;
+    private final int id;
 
     public Vehicle(Position position) {
         this.position = position;
+        this.id = IdGenerator.getId();
     }
 
     public int getX() {
@@ -15,6 +17,10 @@ public abstract class Vehicle {
 
     public int getY() {
         return position.getY();
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setPosition(Position position) {
