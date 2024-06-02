@@ -1,19 +1,8 @@
 TODO
 
-Priority
-Create/check tests for all database classes
+Priority-
 Create a report writer that outputs database details to
     file when the programme is closed.
 
 
 
-
-
-1. Refactoring
-    -) review everything for refactoring opportunities
-
-2. Functionality
-    -) clean up text displays to user
-    -) remove vehicle from surface
-    -) clean up "status" of a vehicle that print position/directional position but take it from the position (toString)
-    -) Interface Scannable with a class that can scan for resources
