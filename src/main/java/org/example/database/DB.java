@@ -1,6 +1,7 @@
 package org.example.database;
 
 import org.example.dataclasses.Instruction;
+import org.example.dataclasses.Resource;
 import org.example.logic.Vehicle;
 
 import java.sql.*;
@@ -46,6 +47,22 @@ public class DB {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, vehicle.getId());
             statement.setString(2, instructionArrayAsString(instruction));
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void logNewResource(Vehicle vehicle, Resource resource) {
+        checkConnection();
+        String sql = """
+                    INSERT INTO resources (vehicle_id, resource)
+                    VALUES (?, ?);
+                    """;
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, vehicle.getId());
+            statement.setString(2, resource.name());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
