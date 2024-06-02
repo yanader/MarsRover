@@ -1,9 +1,12 @@
 TODO
 
+
 1. Refactoring
-    biggest priority: create better separation between programme flow and ui
     -) review everything for refactoring opportunities
-2. Functionality
+2. Testing (Priority)
+    -) Now that UserInterface elements are separate from CommandCenter elements
+        write good tests (including mocking) for command centre.
+3. Functionality
     -) clean up text displays to user
     -) remove vehicle from surface
     -) clean up "status" of a vehicle that print position/directional position but take it from the position (toString)
