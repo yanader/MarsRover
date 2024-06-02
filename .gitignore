@@ -39,3 +39,4 @@ build/
 
 ### Config & Auth ###
 *.properties
+config/*.properties
