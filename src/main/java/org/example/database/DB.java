@@ -80,27 +80,31 @@ public class DB {
     }
 
     // Change this to return a result set, we'll pass that into the ReportWriter
-    public static void readVehicleTable() {
+    public static ResultSet getVehicleDetails() {
         String sql = "SELECT * FROM vehicles;";
         try {
             Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery(sql);
-            while(results.next()) {
-                System.out.println(results.getInt(1) + ": " +results.getString(2));
-            }
+            return statement.executeQuery(sql);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static void readInstructionTable() {
+    public static ResultSet getInstructionDetails() {
         String sql = "SELECT * FROM instructions;";
         try {
             Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery(sql);
-            while(results.next()) {
-                System.out.println(results.getInt(1) + "-" + results.getInt(2) + ": " +results.getString(3));
-            }
+            return statement.executeQuery(sql);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static ResultSet getResourceDetails() {
+        String sql = "SELECT * FROM resources;";
+        try {
+            Statement statement = connection.createStatement();
+            return statement.executeQuery(sql);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

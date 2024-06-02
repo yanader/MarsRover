@@ -29,8 +29,6 @@ public class CommandCentre {
             switch(choice) {
                 case 0:
                     userInterface.endMessage();
-                    DB.readVehicleTable();
-                    DB.readInstructionTable();
                     return;
                 case 1:
                     dropVehicle();
