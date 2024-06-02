@@ -12,7 +12,10 @@ public class DB {
 
     public static Connection connect() throws SQLException {
         Connection connection = DriverManager.getConnection(DB_URL);
-        // Initialisation will be called from here but query in a different class
+
+        DBSetup setup = new DBSetup(connection);
+        setup.seedDatabase();
+
         return connection;
     }
 
