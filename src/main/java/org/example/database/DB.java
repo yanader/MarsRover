@@ -13,8 +13,7 @@ public class DB {
     public static Connection connect() throws SQLException {
         Connection connection = DriverManager.getConnection(DB_URL);
 
-        DBSetup setup = new DBSetup(connection);
-        setup.seedDatabase();
+        new DBSetup(connection);
 
         return connection;
     }

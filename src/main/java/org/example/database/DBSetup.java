@@ -9,6 +9,7 @@ public class DBSetup {
 
     public DBSetup(Connection connection) {
         this.connection = connection;
+        seedDatabase();
     }
 
     public void seedDatabase() {
