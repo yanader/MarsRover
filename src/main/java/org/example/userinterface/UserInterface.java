@@ -190,18 +190,4 @@ public class UserInterface {
         System.out.println("\t\tRotates left");
         System.out.println("\t\tMoves forward two spaces");
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

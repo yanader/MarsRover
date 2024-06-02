@@ -8,12 +8,10 @@ import org.example.logic.DirectionalPosition;
 import org.example.logic.Miner;
 import org.example.logic.Rover;
 import org.example.logic.Vehicle;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.lang.reflect.Field;
@@ -25,7 +23,6 @@ import static org.mockito.Mockito.*;
 
 class UserInterfaceTest {
 
-//    @Mock
     Scanner mockScanner = Mockito.mock(Scanner.class);
 
     @InjectMocks
@@ -125,23 +122,5 @@ class UserInterfaceTest {
             assertArrayEquals(expectedOutputOne, userInterface.promptForInstructions(new Rover(new DirectionalPosition(0, 0, Direction.N))));
             assertArrayEquals(expectedOutputTwo, userInterface.promptForInstructions(new Miner(new Position(0, 0))));
         });
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
