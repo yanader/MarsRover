@@ -1,5 +1,7 @@
 package org.example.userinterface;
 
+import org.example.database.DB;
+import org.example.database.DBSetup;
 import org.example.dataclasses.*;
 import org.example.logic.*;
 import org.example.parsers.*;
@@ -13,6 +15,7 @@ public class CommandCentre {
 
     public CommandCentre() {
         this.userInterface = new UserInterface();
+        DB.setup();
         startMission();
     }
 
@@ -26,6 +29,8 @@ public class CommandCentre {
             switch(choice) {
                 case 0:
                     userInterface.endMessage();
+                    DB.readVehicleTable();
+                    DB.readInstructionTable();
                     return;
                 case 1:
                     dropVehicle();
@@ -68,6 +73,7 @@ public class CommandCentre {
                 plateau.landVehicle(vehicle);
                 this.activeVehicle = vehicle;
                 userInterface.reportVehicleLaunch(activeVehicle);
+                DB.logNewVehicle(activeVehicle);
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println("Invalid input for initial position");
@@ -100,6 +106,7 @@ public class CommandCentre {
     private void movableMoves(Movable movable, Instruction[] instructions) {
         if (plateau.movementSetIsPossible((Movable)activeVehicle, instructions)) {
             movable.move(instructions);
+            DB.logNewInstruction(activeVehicle, instructions);
             userInterface.confirmMove(activeVehicle);
         } else {
             userInterface.collisionWarning();
@@ -109,6 +116,7 @@ public class CommandCentre {
 
     private void diggableDigs(Diggable diggable, Instruction[] instructions) {
         Resource resource = diggable.dig(instructions);
+        DB.logNewInstruction(activeVehicle, instructions);
         userInterface.confirmDig(activeVehicle, resource);
     }
 
