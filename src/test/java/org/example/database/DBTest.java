@@ -20,6 +20,7 @@ class DBTest {
     void setup() {
         try {
             connection = DB.connect();
+            DB.setup();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -9,13 +9,15 @@ import java.sql.SQLException;
 public class DB {
     private final static DBConfig config = new DBConfig();
     private final static String DB_URL = config.getURL();
+    private static Connection connection;
 
     public static Connection connect() throws SQLException {
-        Connection connection = DriverManager.getConnection(DB_URL);
-
-        new DBSetup(connection);
-
+        connection = DriverManager.getConnection(DB_URL);
         return connection;
+    }
+
+    public static void setup() {
+        new DBSetup(connection);
     }
 
 
