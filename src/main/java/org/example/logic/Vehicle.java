@@ -4,6 +4,7 @@ import org.example.dataclasses.Position;
 
 public abstract class Vehicle {
     private Position position;
+    private int id;
 
     public Vehicle(Position position) {
         this.position = position;
@@ -28,4 +29,6 @@ public abstract class Vehicle {
     public String outputPosition() {
         return this.position.toString();
     }
+
+
 }
