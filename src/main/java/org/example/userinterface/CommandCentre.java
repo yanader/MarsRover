@@ -115,6 +115,7 @@ public class CommandCentre {
     private void diggableDigs(Diggable diggable, Instruction[] instructions) {
         Resource resource = diggable.dig(instructions);
         DB.logNewInstruction(activeVehicle, instructions);
+        DB.logNewResource(activeVehicle, resource);
         userInterface.confirmDig(activeVehicle, resource);
     }
 
