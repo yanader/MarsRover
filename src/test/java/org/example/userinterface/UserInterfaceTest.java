@@ -1,6 +1,7 @@
 package org.example.userinterface;
 
 import org.example.dataclasses.Direction;
+import org.example.dataclasses.Instruction;
 import org.example.dataclasses.PlateauSize;
 import org.example.dataclasses.Position;
 import org.example.logic.DirectionalPosition;
@@ -112,6 +113,19 @@ class UserInterfaceTest {
         when(mockScanner.nextLine()).thenReturn("").thenReturn("5 5 N");
         assertEquals("5 5 N", userInterface.getDirectionalPosition());
         verify(mockScanner, times(2)).nextLine();
+    }
+
+    @Test
+    void promptForInstructionReturnsAppropriateInstruction() {
+        when(mockScanner.nextLine()).thenReturn("MLM").thenReturn("D");
+        Instruction[] expectedOutputOne = {Instruction.M, Instruction.L, Instruction.M};
+        Instruction[] expectedOutputTwo = {Instruction.D};
+
+        assertAll(() -> {
+            assertArrayEquals(expectedOutputOne, userInterface.promptForInstructions(new Rover(new DirectionalPosition(0, 0, Direction.N))));
+            assertArrayEquals(expectedOutputTwo, userInterface.promptForInstructions(new Miner(new Position(0, 0))));
+        });
+
     }
 
 
