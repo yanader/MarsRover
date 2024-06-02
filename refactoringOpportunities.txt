@@ -1,4 +1,0 @@
-Plateau.instructionSetIsPossible & Plateau.truncateInstructions are VERY similar.
-Is it possible I can do this with one method that returns an int.
-    int will match the length of the string of instruction if all possible
-    int will match the number of instruction that ARE possible if

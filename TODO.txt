@@ -3,10 +3,8 @@ TODO
 
 1. Refactoring
     -) review everything for refactoring opportunities
-2. Testing (Priority)
-    -) Now that UserInterface elements are separate from CommandCenter elements
-        write good tests (including mocking) for command centre.
-3. Functionality
+
+2. Functionality
     -) clean up text displays to user
     -) remove vehicle from surface
     -) clean up "status" of a vehicle that print position/directional position but take it from the position (toString)
