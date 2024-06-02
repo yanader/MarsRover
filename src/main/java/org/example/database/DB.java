@@ -79,7 +79,6 @@ public class DB {
         }
     }
 
-    // Change this to return a result set, we'll pass that into the ReportWriter
     public static ResultSet getVehicleDetails() {
         String sql = "SELECT * FROM vehicles;";
         try {
@@ -109,8 +108,6 @@ public class DB {
             throw new RuntimeException(e);
         }
     }
-
-
 
     private static String instructionArrayAsString(Instruction[] instructions) {
         StringBuilder sb = new StringBuilder();
