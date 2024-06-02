@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DBSetup {
-    private Connection connection;
+    private final Connection connection;
 
     public DBSetup(Connection connection) {
         this.connection = connection;

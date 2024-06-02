@@ -1,7 +1,6 @@
 package org.example.userinterface;
 
 import org.example.database.DB;
-import org.example.database.DBSetup;
 import org.example.dataclasses.*;
 import org.example.logic.*;
 import org.example.parsers.*;

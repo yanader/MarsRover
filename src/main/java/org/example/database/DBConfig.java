@@ -2,12 +2,11 @@ package org.example.database;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
 public class DBConfig {
-    private Properties properties;
+    private final Properties properties;
 
     public DBConfig() {
         properties = new Properties();
