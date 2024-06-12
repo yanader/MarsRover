@@ -89,9 +89,9 @@ To run with an in memory, H2 database, create a local config file at:
 
 Include the following properties. (Note: The generic H2 username is 'sa')
 
-1.  db.url=jdbc:h2:mem:test
-2.  db.username=<USERNAME>
-3.  db.password=<PASSWORD>
+1.  `db.url=jdbc:h2:mem:test`
+2.  `db.username=<USERNAME>`
+3.  `db.password=<PASSWORD>`
 
 ### Future Inclusions
 
