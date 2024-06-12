@@ -81,6 +81,18 @@ The codebase is split into several packages as follows:
 3. logic - provides Classes for Plateau and vehicle types as well as interfaces to dictate vehicle behaviours. Any new vehicle type should extend Vehicle and implement appropriate interfaces
 4. userinterface - provides the CommandCentre class which initialises the programme, controls setup and continued programme flow until the user exits and the UserInterface that handles user inputs
 
+#### In memory database
+
+To run with an in memory, H2 database, create a local config file at:
+
+```/config/db.properties```
+
+Include the following properties. (Note: The generic H2 username is 'sa')
+
+1.  db.url=jdbc:h2:mem:test
+2.  db.username=<USERNAME>
+3.  db.password=<PASSWORD>
+
 ### Future Inclusions
 
 1. ~Truncation of user input~
