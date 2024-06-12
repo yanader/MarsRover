@@ -90,3 +90,4 @@ The codebase is split into several packages as follows:
    - ~Miner implements Minable~
 3. Inclusion of multiple Plateaus (landing sites) per mission with the ability to move Vehicles between them.
 4. Include an in memory H2 database that compiles a mission report that will output to a file on termination of the programme
+   - In memory database is in place. Report writer is under construction on a separate branch.
