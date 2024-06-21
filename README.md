@@ -71,6 +71,12 @@ This will provide you with a custom-built Command Centre which will allow you to
    - Input 'H' to access help
    - Input '0' to quit the Mars Rover Application
 
+### Mission Report
+
+At the conclusion of each mission, a date and time-stamped mission report containing details of launched vehicles, instructions and mined resources will be produced and can be found at:
+
+` /src/main/resources/missionreports`
+
 
 ### Documentation
 
@@ -93,13 +99,14 @@ Include the following properties. (Note: The generic H2 username is 'sa')
 2.  `db.username=<USERNAME>`
 3.  `db.password=<PASSWORD>`
 
+
 ### Future Inclusions
 
-1. ~Truncation of user input~
-   - ~On receiving an instruction set that would ordinarily be rejected by the Command Center, the option to execute a truncated instruction set will be offered which will execute the instruction up until but not including the individual instruction that is invalid.~
+1. ~~Truncation of user input~~
+   - ~~On receiving an instruction set that would ordinarily be rejected by the Command Center, the option to execute a truncated instruction set will be offered which will execute the instruction up until but not including the individual instruction that is invalid.~~
 2. Additional Vehicle Types with appropriate interfaces. These additions will allow for surface samples to be tested and, if desired, mined for resources
    - Tester implements Testable, Movable
-   - ~Miner implements Minable~
+   - ~~Miner implements Minable~~
 3. Inclusion of multiple Plateaus (landing sites) per mission with the ability to move Vehicles between them.
-4. Include an in memory H2 database that compiles a mission report that will output to a file on termination of the programme
-   - In memory database is in place. Report writer is under construction on a separate branch.
+4. ~~Include an in memory H2 database that compiles a mission report that will output to a file on termination of the programme~~
+   ~~- In memory database is in place. Report writer is under construction.~~

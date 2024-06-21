@@ -3,8 +3,11 @@ package org.example.userinterface;
 import org.example.database.DB;
 import org.example.dataclasses.*;
 import org.example.logic.*;
+import org.example.output.ReportWriter;
 import org.example.parsers.*;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 public class CommandCentre {
@@ -28,6 +31,11 @@ public class CommandCentre {
             switch(choice) {
                 case 0:
                     userInterface.endMessage();
+                    try {
+                        ReportWriter reportWriter = new ReportWriter();
+                    } catch (IOException | SQLException e) {
+                        System.out.println("Report writing failed");
+                    }
                     return;
                 case 1:
                     dropVehicle();

@@ -1,0 +1,25 @@
+Mission Successful -2024-06-21T21:34:35.980508305
+-------------------------------------------------
+VehicleId  		VehicleType
+VehicleID: 1	VehicleType: Rover
+VehicleID: 14	VehicleType: Miner
+
+
+InstructionInstance  	VehicleId  		Instruction
+InstructionID: 1		VehicleID: 1	Instruction: LRMLRMRLMRLMR
+InstructionID: 2		VehicleID: 1	Instruction: LMRLRMLRMRLMR
+InstructionID: 3		VehicleID: 1	Instruction: RLMRLMRLMRLMR
+InstructionID: 4		VehicleID: 1	Instruction: RLMRLMRLMRLMR
+InstructionID: 5		VehicleID: 1	Instruction: LRMRLMRLMRMLRM
+InstructionID: 6		VehicleID: 1	Instruction: RLMRLMRLMRLMRLRM
+InstructionID: 7		VehicleID: 1	Instruction: MMMMMMMMMMMMMMMM
+InstructionID: 8		VehicleID: 1	Instruction: MMMMMMMMMMMMM
+InstructionID: 9		VehicleID: 1	Instruction: MMMMMMMMMMMMMMMMMMMM
+InstructionID: 10		VehicleID: 1	Instruction: MRMRMR
+InstructionID: 11		VehicleID: 14	Instruction: D
+
+
+ResourceInstance  		VehicleId  		Resource
+ResourceInstanceID: 1	VehicleId: 14	Resource: ROCK
+
+
